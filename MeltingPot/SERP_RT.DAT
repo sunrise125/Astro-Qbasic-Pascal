@@ -1,0 +1,45 @@
+ 1991  8  11   23  35  40                    ! Epoca
+ 44.20550   10.73611   44.12639   10.78472   ! (íB,LaB), (íA,LaA)
+ 285.98494     70.81910   276.21746     72.82143  Pto 50_A -> 71_B  +10 mt
+
+ 281.92669     69.00247   272.00086     70.88446  Pto 90_A -> 114_B  -7 mt
+ 281.92669     69.00247   271.90280     70.83320  Pto 90_A -> 115_B +28 mt
+ 281.92669     69.00247   271.80474     70.78163  Pto 90_A -> 116_B +57 mt
+ 281.92669     69.00247   271.41250     70.57211  Pto 90_A -> 120_B
+ 281.92669     69.00247   272.39311     71.08635  Pto 90_A -> 110_B
+ 281.92669     69.00247   273.37371     71.57011  Pto 90_A -> 100_B
+
+ 292.07231     72.90305   283.08169     75.12689  Pto -10_A -> 1_B  +23 mt
+ 292.07231     72.90305   282.98363     75.09960  Pto -10_A -> 2_B
+ 292.07231     72.90305   282.78751     75.04459  Pto -10_A -> 4_B
+ 292.07231     72.90305   282.59139     74.98901  Pto -10_A -> 6_B
+ 292.07231     72.90305   282.68945     75.01687  Pto -10_A -> 5_B
+
+ 296.3   74.0   287.5   76.4  Punto INIZIALE
+ 279.0   67.4   269.8   69.3  Punto FINALE
+-------------------------------------------------------------------------------
+ METEORA dell'11/8/1991 - 23.35.40 TU: Mirco Villa (lettera 20.2.00+l'astr.ago-Set93)
+ Staz.A ð Lago della Ninfa(MO); Staz.B ð Passo Croce Arcana(MO)
+----------  Sono lette le prime 3 RIGHE del file  -----------------------------
+1^ riga: Data dell'osservaz.: Anno, mese, giorno; Ore, Min, Sec (in TU)
+2^ riga: Latitudine, Longit.Est in GRADI 1^ Staz.(A)
+         Latitudine, Longit.Est in GRADI 2^ Staz.(B)
+3^ riga: (à,ë) in GRADI del Punto visto da A;
+         (à,ë) in GRADI del Punto visto da B
+         Stringa del Punto della meteora considerato (max.25 car., 2 spazi
+                                                     vuoti dopo l'ultima cifra)
+-------------------------------------------------------------------------------
+ BOLIDE dell'11/8/1993 - 23.13.20 TU: ing. Roberto Serpilli (lettera 23/2/2000)
+ Staz.A ð Culmine S.Pietro(CO); Staz.B ð Vetriolo Terme(TN)
+ 1993  8  11   23  13  20
+ 45.9043   9.4883   46.0542   11.3133
+ 4.6125   12.2911   285.3125   7.2  Punto scia 1 (ping)
+            Stand-by  3^ riga
+ 12.675   28.2122   298.5     28.5333  Punto scia 7
+ 11.3375  25.9775   296.25    25.8  Punto scia 6
+ 8.5458   20.7833   291.7917  18.8833  Punto scia 5
+ 7.875    19.125    290.5     16.5  Punto scia 4
+ 5.9708   15.1667   287.25    10.75  Punto scia 3
+ 5.5083   14.1939   286.5833   9.5  Punto scia 2
+ 4.6125   12.2911   285.3125   7.2  Punto scia 1 (ping)
+ 4.2708   11.6944   284.875    6.4333  Punto scia 0

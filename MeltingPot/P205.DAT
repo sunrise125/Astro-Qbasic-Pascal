@@ -1,0 +1,23 @@
+SAO 044166                  12 22 40.293    45 04 33.400    47.5      73.3
+SAO 044175                  12 23 32.960    43 23 42.590    41.2     -62.1
+SAO 044177                  12 23 56.037    44 59 16.140    29.9      65.2
+SAO 044187                  12 25 39.308    45 04 14.330     5.5      71.1
+SAO 044199                  12 26 43.594    43 17 28.860    -4.8     -72.7
+SAO 044207                  12 28 27.655    44 27 53.230   -33.0      21.0
+SAO 044208                  12 28 27.755    43 26 04.190   -31.2     -62.0
+SAO 044220                  12 29 52.083    43 28 33.760   -51.2     -59.7
+SAO 044221                  12 29 56.524    44 57 27.650   -55.7      60.6
+Cometa Bradfield                                            29.2     -42.1
+
+--------  lasciare la riga di sopra SEMPRE vuota ---------------------
+************** Esempio di pag. 205 del libro del Montenbruck *****************
+    Da qui in gi— -> Commenti senza alcuna limitazione
+MPASTROM.EXE: Input File
+^ 3908         --- Minor Planet No.             ---
+# 1996 11 2    --- Date [year month day]        ---
+@ 20 11 20     --- U.T. [hours minutes seconds] ---
+
+-----------------------------------------------------------------------------
+Reference Stars                R.A.            Decl.           Measurement
+  Designation                hh mm ss.sss    gg pp ss.sss    x [mm]    y [mm]
+-----------------------------------------------------------------------------

@@ -1,0 +1,34 @@
+ 1993  8  11   23  13  20
+ 45.9043   9.4883  46.0542   11.3133
+ 8.5458   20.7833   291.7917  18.8833
+ 5.9708   15.1667   287.25    10.75
+ 4.6125   12.2911   285.3125   7.2
+ BOLIDE dell'11/8/1993 - 23.13.20 TU: ing. Roberto Serpilli (lettera 23/2/2000)
+ Staz.A ð Culmine S.Pietro(CO); Staz.B ð Vetriolo Terme(TN)
+ Punti scia: 5, 3, 1(ping) -> dal pi— alto al pi— basso
+----------  Sono lette le prime 5 RIGHE del file  ---------------------------
+1^ riga: Data dell'osservaz.: Anno, mese, giorno; Ore, Min, Sec (in TU)
+2^ riga: Latitudine, Longit.Est in GRADI della 1^ Stazione di rilevamento (A);
+         Latitudine, Longit.Est in GRADI della 2^ Stazione di rilevamento (B)
+3^ riga: (à,ë) in GRADI 1ø Punto visto da A  (à,ë) in GRADI 1ø Punto visto da B
+4^ riga: (à,ë) in GRADI 2ø Punto visto da A  (à,ë) in GRADI 2ø Punto visto da B
+5^ riga: (à,ë) in GRADI 3ø Punto visto da A  (à,ë) in GRADI 3ø Punto visto da B
+-----------------------------------------------------------------------------
+ 1991  8  11   23  35  40
+ 44.2055   10.7361  44.1264    10.7847
+ 293.3   73.25   284.25   75.633
+ 286.25  70.75   277.0    73.133
+ 280.75  68.417  271.375  70.467
+ Perseide dell'11/8/1991 - 23.35.40 TU: Mirco Villa (II) -> (à,ë) da Mappa2
+ 1991  8  11   23  35  40
+ 44.2055   10.7361  44.1264    10.7847
+ 296.3   74.0    287.5   76.4
+ 286.25  70.8    277.0   73.1
+ 279.0   67.4    269.8   69.3
+ Perseide dell'11/8/1991 - 23.35.40 TU: Mirco Villa (I) l'astronomia ago-set.93
+ 1994  8  13   1  31  32
+ 43.7311     15.7950  44.0405     11.9738
+ 305.4   43.1    70.4   11.8
+ 300.7   37.6    71.0    9.4
+ 298.7   35.4    71.2    8.4
+ Bolide del 13/8/94: Dati ricavati da Astronomia UAI n.1 1996 - p.14

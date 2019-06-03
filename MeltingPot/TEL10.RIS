@@ -1,0 +1,20 @@
+                         Telaio tel10 - RISULTATI FINALI
+         [MOMENTI Antiorari POSITIVI - TAGLI Sin-Alto e Des-Basso POSITIVI
+              SFORZI NORMALI Positivi=TIRANTI; Negativi=PUNTONI]
+                              TRAVE n. 1
+             Sinistra                        Destra
+               M =    1.408                    M =   19.110
+               T =    2.418                    T =    2.418
+               N =  -44.128                    N =  -44.128
+        Reazioni vincolari:  V=  32.913    H =   29.494   M =   19.110
+                              TRAVE n. 2
+             Sinistra                        Destra
+               M =   -1.408                    M = -101.112
+               T =   32.913                    T =  -67.087
+               N =  -29.494                    N =  -29.494
+                              TRAVE n. 3
+             Sinistra                        Destra
+               M =  101.112                    M =   75.850
+               T =   29.494                    T =   29.494
+               N =  -67.087                    N =  -67.087
+        Reazioni vincolari:  V=  67.087    H =  -29.494   M =   75.850

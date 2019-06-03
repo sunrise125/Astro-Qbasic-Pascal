@@ -1,0 +1,20 @@
+                         Telaio p26 - RISULTATI FINALI
+         [MOMENTI Antiorari POSITIVI - TAGLI Sin-Alto e Des-Basso POSITIVI
+              SFORZI NORMALI Positivi=TIRANTI; Negativi=PUNTONI]
+                              TRAVE n. 1
+             Sinistra                        Destra
+               M =  -89.865                    M =   -0.000
+               T =  -17.973                    T =  -17.973
+               N =  -60.000                    N =  -60.000
+        Reazioni vincolari:  V=  60.000    H =   17.973   M =   -0.000
+                              TRAVE n. 2
+             Sinistra                        Destra
+               M =   89.865                    M =  -89.865
+               T =   60.000                    T =  -40.000
+               N =  -17.973                    N =  -17.973
+                              TRAVE n. 3
+             Sinistra                        Destra
+               M =   89.865                    M =    0.000
+               T =   17.973                    T =   17.973
+               N =  -40.000                    N =  -40.000
+        Reazioni vincolari:  V=  40.000    H =  -17.973   M =    0.000
