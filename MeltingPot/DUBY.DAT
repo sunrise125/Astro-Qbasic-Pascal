@@ -1,0 +1,78 @@
+ 1991  8  12   22  58  15
+ 44.2055   10.7361  44.1264   10.7847
+ 0  1
+ 282.2866  45.3858  277.9115  48.3998
+ 272.8394  29.4847  268.6639  32.4693
+ Perseide 3 - Villa e Melandri  ---> Catalogo SAO (Riduastr.exe)  PERSEIDE 3
+ Punti: I, F
+ ---------------------------------------------------------------------------
+ 1991  8  13   2  47  45
+ 44.2055   10.7361  44.1264   10.7847
+ 0  1
+ 365.9352  45.6454  362.1867  49.9421   (Inizio e Fine scia CORRETTE)
+ 361.0623  42.5475  356.6896  47.5533
+ Perseide 5 - Villa e Melandri  ---> Catalogo PPM (Rid2.exe) (PERSEIDE 5)
+ Punti: I, F
+ ---------------------------------------------------------------------------
+ 1991  8  13   2  47  45
+ 44.1264   10.7847  44.2055   10.7361
+ 0  1
+ 362.1867  49.9421  365.9352  45.6454   (Inizio e Fine scia INVERTITE risp.foto
+ 356.6896  47.5533  361.0623  42.5475
+ Perseide 5 - Villa e Melandri  ---> Catalogo PPM (Rid2.exe) (PERSEIDE 5)
+ Punti: I, F
+ ---------------------------------------------------------------------------
+ 1991  8  13   1  4  56
+ 44.1264   10.7847  44.2055   10.7361
+ 0  1
+ 313.3150  59.3225  318.8608  56.2349
+ 301.8850  52.6793  307.6736  49.4164
+ Perseide 4 - Villa e Melandri  ---> Catalogo PPM (Rid2.exe)  DEFINITIVO !!
+ Punti: I, F                                                  ‹‹‹‹‹‹‹‹‹‹
+
+ 1991  8  13   1  4  56
+ 44.1264   10.7847  44.2055   10.7361
+ 0  1
+ 313.6672  59.5356  319.4717  56.4048
+ 301.6021  52.4951  307.8048  49.4779
+ Perseide 4 - Villa e Melandri  ---> Catalogo PPM (Rid2.exe)  PIU' PRECISO !!
+ Punti: I, F
+
+ Nuovo Affinamento:
+ 313.6672  59.5356  319.4717  56.4048
+ 301.6021  52.4951  307.8048  49.4779
+
+ Dati Originari:
+ 313.6648  59.5555  319.4635  56.3952
+ 301.6088  52.4915  307.7862  49.4806
+ -----------------------------------------------------------------------------
+ 1991  8  13   1  4  56
+ 44.1264   10.7847  44.2055   10.7361
+ 0  1
+ 313.5944  59.5227  319.3945  56.3939
+ 301.5895  52.5712  307.7272  49.5072
+ Perseide 4 - Villa e Melandri  --------------> Catalogo PPM (Rid2.exe)
+ Punti: I, F
+ -----------------------------------------------------------------------------
+ 1991  8  13   1  4  56
+ 44.1264   10.7847  44.2055   10.7361
+ 0  1
+ 314.1228  59.6630  318.9077  56.1677
+ 301.3125  52.5050  307.9201  49.6511
+ Perseide 4 - Villa e Melandri
+ Punti: I, F
+ -----------------------------------------------------------------------------
+ 1991  8  11   23  35  40
+ 44.2055   10.7361  44.1264   10.7847
+ 0   1
+ 296.3   74.0    287.5   76.4  (Punto inizio Staz. A e B; p.47 dell'articolo)
+ 279.0   67.4    269.8   69.3  (Punto fine   Staz. A e B; p.47 dell'articolo)
+ Staz.A  Lago della Ninfa(MO); Staz.B  Passo Croce Arcana(MO)
+----------  Sono lette solo le prime 5 RIGHE -----------------------------
+1^ riga: Data dell'osservaz.: Anno, mese, giorno; Ore, Min, Sec (in TU)
+2^ riga: Latitudine, Longit.Est in GRADI 1^ Staz.(A)
+         Latitudine, Longit.Est in GRADI 2^ Staz.(B)
+3^       Tempi in SEC  [t1=0; t2=...]                      ‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹
+4^ riga: (‡,Î) in GRADI del primo Punto visto da A e da B;  Punti NON necessa-
+5^ riga: (‡,Î) in GRADI del secon.Punto visto da A e da B   riamente omologhi
+-----------------------------------------------------------‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹
