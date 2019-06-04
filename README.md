@@ -11,8 +11,36 @@ Fill here the QuickBasic listouts
 ### PASCAL_Folder (.PAS) store
 Fill here the Pascal listouts
 
-## Howto 
+## Howto
+Reference is made to any system Unixlike which uses <b>dosemu</b> emulator to be
+performed as superuser. 
 
 ### Qbasic programs
+<PRE>
+  1.. Enter into QBASIC folder
+  
+  2.. Terminal command: sudo -s (superuser)
+  
+  3.. dosemu QBASIC.EXE
+  
+  4.. enlarge the red interactive windows of QBASIC, then
+      File -> Esc -> Open -> choose the .BAS to run
+</PRE>      
+
 
 ### Pascal programs
+<PRE>
+  1.. Enter into PASCAL folder
+  
+  2.. Terminal command: sudo -s (superuser)
+  
+  3.. dosemu TURBO.EXE
+  
+  4.. File -> DOS Shell
+
+  5.. TPC filename    (not case sensitive)
+  
+  6.. filename        (to start the executable)  
+</PRE>   
+
+
