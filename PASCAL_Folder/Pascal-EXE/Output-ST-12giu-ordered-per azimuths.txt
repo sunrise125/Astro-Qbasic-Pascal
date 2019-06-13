@@ -1,0 +1,68 @@
+ Observer Coords. (lat,lon,H)= 37.0328  15.0650  370.0
+ Date: 2019/6/13.84375
+------------------------------------------------------
+STARLINK BG   Azim.[deg]= 114.4502   Height[deg]=  24.1551   Visible
+STARLINK BL   Azim.[deg]= 117.5594   Height[deg]=  17.2210   Visible
+STARLINK AD   Azim.[deg]= 118.8964   Height[deg]=  14.3040   Visible
+STARLINK B    Azim.[deg]= 122.7545   Height[deg]=  -1.9625   NOT-Visible
+STARLINK AZ   Azim.[deg]= 122.9851   Height[deg]=   5.1329   Visible
+STARLINK E    Azim.[deg]= 126.6990   Height[deg]= -19.9344   NOT-Visible
+STARLINK BB   Azim.[deg]= 127.3642   Height[deg]= -18.6952   NOT-Visible
+STARLINK BK   Azim.[deg]= 127.5325   Height[deg]= -29.7209   NOT-Visible
+STARLINK AL   Azim.[deg]= 127.5731   Height[deg]= -22.4596   NOT-Visible
+STARLINK BM   Azim.[deg]= 127.8073   Height[deg]= -24.1917   NOT-Visible
+STARLINK R    Azim.[deg]= 128.2294   Height[deg]= -32.2257   NOT-Visible
+STARLINK AN   Azim.[deg]= 128.4913   Height[deg]= -35.2490   NOT-Visible
+STARLINK H    Azim.[deg]= 128.7268   Height[deg]= -39.6629   NOT-Visible
+STARLINK S    Azim.[deg]= 128.8150   Height[deg]= -39.8520   NOT-Visible
+STARLINK P    Azim.[deg]= 128.8340   Height[deg]= -41.4720   NOT-Visible
+STARLINK AM   Azim.[deg]= 128.9264   Height[deg]= -43.3517   NOT-Visible
+STARLINK AS   Azim.[deg]= 129.3589   Height[deg]= -51.2421   NOT-Visible
+STARLINK AY   Azim.[deg]= 129.4593   Height[deg]= -53.2942   NOT-Visible
+STARLINK W    Azim.[deg]= 129.5950   Height[deg]= -55.5010   NOT-Visible
+STARLINK AH   Azim.[deg]= 129.9525   Height[deg]= -56.1663   NOT-Visible
+STARLINK AU   Azim.[deg]= 129.9902   Height[deg]= -61.2036   NOT-Visible
+STARLINK AX   Azim.[deg]= 130.1966   Height[deg]= -63.2408   NOT-Visible
+STARLINK J    Azim.[deg]= 130.6378   Height[deg]= -65.7614   NOT-Visible
+STARLINK AT   Azim.[deg]= 130.9272   Height[deg]= -69.8206   NOT-Visible
+STARLINK BF   Azim.[deg]= 131.3038   Height[deg]= -71.5218   NOT-Visible
+STARLINK BH   Azim.[deg]= 131.6360   Height[deg]= -72.6622   NOT-Visible
+STARLINK AR   Azim.[deg]= 132.3927   Height[deg]= -77.3167   NOT-Visible
+STARLINK BD   Azim.[deg]= 135.7202   Height[deg]= -82.6673   NOT-Visible
+STARLINK AJ   Azim.[deg]= 135.8134   Height[deg]= -83.4522   NOT-Visible
+STARLINK T    Azim.[deg]= 146.8420   Height[deg]= -87.1170   NOT-Visible
+STARLINK AW   Azim.[deg]= 303.5149   Height[deg]= -82.2884   NOT-Visible
+STARLINK AP   Azim.[deg]= 304.0170   Height[deg]= -78.9488   NOT-Visible
+STARLINK BA   Azim.[deg]= 306.2228   Height[deg]= -72.5862   NOT-Visible
+STARLINK AE   Azim.[deg]= 306.6031   Height[deg]= -70.6953   NOT-Visible
+STARLINK BJ   Azim.[deg]= 307.0230   Height[deg]= -59.9081   NOT-Visible
+STARLINK BC   Azim.[deg]= 307.3823   Height[deg]= -65.0138   NOT-Visible
+STARLINK N    Azim.[deg]= 307.5004   Height[deg]= -63.5419   NOT-Visible
+STARLINK K    Azim.[deg]= 307.9408   Height[deg]= -58.4690   NOT-Visible
+STARLINK AF   Azim.[deg]= 308.3049   Height[deg]= -53.0396   NOT-Visible
+STARLINK Q    Azim.[deg]= 308.6717   Height[deg]= -47.2708   NOT-Visible
+STARLINK AA   Azim.[deg]= 308.9282   Height[deg]= -51.9433   NOT-Visible
+STARLINK Z    Azim.[deg]= 309.3068   Height[deg]= -36.5041   NOT-Visible
+STARLINK V    Azim.[deg]= 309.4031   Height[deg]= -34.7647   NOT-Visible
+STARLINK F    Azim.[deg]= 309.4876   Height[deg]= -39.9603   NOT-Visible
+STARLINK M    Azim.[deg]= 309.9022   Height[deg]= -27.5287   NOT-Visible
+STARLINK C    Azim.[deg]= 309.9369   Height[deg]= -26.9715   NOT-Visible
+STARLINK AC   Azim.[deg]= 309.9451   Height[deg]= -28.2756   NOT-Visible
+STARLINK Y    Azim.[deg]= 309.9518   Height[deg]= -32.6110   NOT-Visible
+STARLINK X    Azim.[deg]= 310.1418   Height[deg]= -25.5909   NOT-Visible
+FALCON 9 DEB  Azim.[deg]= 310.2379   Height[deg]= -44.4262   NOT-Visible
+FALCON 9 DEB  Azim.[deg]= 310.2951   Height[deg]= -42.3887   NOT-Visible
+STARLINK AB   Azim.[deg]= 310.3750   Height[deg]= -37.1189   NOT-Visible
+STARLINK AG   Azim.[deg]= 310.5137   Height[deg]= -34.3988   NOT-Visible
+STARLINK BE   Azim.[deg]= 310.7326   Height[deg]= -18.0185   NOT-Visible
+STARLINK AV   Azim.[deg]= 310.7535   Height[deg]= -18.8295   NOT-Visible
+STARLINK AQ   Azim.[deg]= 311.4938   Height[deg]= -10.9753   NOT-Visible
+STARLINK AK   Azim.[deg]= 311.9847   Height[deg]=  -7.8791   NOT-Visible
+STARLINK A    Azim.[deg]= 313.6817   Height[deg]=   0.6248   Visible
+STARLINK G    Azim.[deg]= 315.0848   Height[deg]=   5.0747   Visible
+FALCON 9 DEB  Azim.[deg]= 316.9011   Height[deg]=  24.9614   Visible
+STARLINK L    Azim.[deg]= 319.3742   Height[deg]=  17.1161   Visible
+STARLINK D    Azim.[deg]= 323.7170   Height[deg]=  29.0700   Visible
+FALCON 9 DEB  Azim.[deg]= 324.5591   Height[deg]=  47.5323   Visible
+STARLINK U    Azim.[deg]= 341.6926   Height[deg]=  48.2968   Visible
+
