@@ -103,7 +103,7 @@
       WRITE (*,*)"  *     New SOFA routines added into 1818.for , JPL DE430t database,       *" 
       WRITE (*,*)"  *     IERS FINAL_ data (IAU2000), and EOP C01 1900-now modified          *"           
       WRITE (*,*)"  *                                                                        *"
-      WRITE (*,*)"  *      --------------------planet430C.f90 -------- (Lug.30,2019) --------*"
+      WRITE (*,*)"  *      --------------------planet430C.f90 -------- (Jul.30,2019) --------*"
       WRITE (*,*)"  *                                                                        *"
       WRITE (*,*)"  *     THIS PROGRAN COMPUTES THE APPARENT DIRECTION OF SOLAR SYSTEM       *"
       WRITE (*,*)"  *     BODY AT A SPECIFIED TIME AND IN A SPECIFIED COORDINATE SYSTEM      *"
@@ -131,31 +131,12 @@
       WRITE (*,*)"  *                                                                        *"
       WRITE (*,*)"  **************************************************************************"
       WRITE (*,*)
-                   
-      WRITE (*,*)" ****  We recommend that you update at least every 15 days, checking ****  "
-      WRITE (*,*)" ****      the FINAL_ dates of the respective IERS database           ****  "
-      WRITE (*,*)" ========================================================================= "
-
-      WRITE (*,*)" Enter the last updated dates (MJD) of the IERS databases "
-      WRITE (*,*)" Finals data (IAU2000) and EOP14 C04 (IAU2000A) or uses   "
-      WRITE (*,*)" default dates (1 or 2)"  
-
-      READ*,YN
-                 
-      IF ( YN == 1) THEN
-        PRINT*, "  ENTER  FINAL_ ... " 
-        READ*,FINAL_
-        PRINT*, "  ENTER EOP_final ..."
-        READ*,EOP_final
-        GOTO 3                     
-      ELSEIF ( YN == 2) THEN
-        GOTO 2
-      END IF                          
+                      
 
 2     continue    
       FINAL_ = 59062       ! 2020/08/01   reported in MJD IERS FINAL_ data (for update) 
 
-      EOP_final = 58659  ! 2019/06/25 jump from IERS EOP14 C04 to IERS FINAL_ data (IAU2000).
+      EOP_final = 58659    ! 2019/06/25 jump from IERS EOP14 C04 to IERS FINAL_ data (IAU2000).
 
 3     continue            
 10    WRITE(*,*)
