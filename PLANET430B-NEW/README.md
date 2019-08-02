@@ -5,8 +5,8 @@ For such a reason the two databases shown in figure <b>updating_2dbases.png</b> 
 
 Find below the links to download both, coming from this URL: https://www.iers.org/IERS/EN/DataProducts/EarthOrientationData/eop.html
 ### final-iers.txt 
-[finals.data (IAU2000), latest verson]
+Paste&copy from finals.data (IAU2000), latest version
 https://datacenter.iers.org/data/latestVersion/10_FINALS.DATA_IAU2000_V2013_0110.txt
 ### iers1962_now.txt 
-[EOP 14 C04 (IAU2000A) - one file (1962-now), latest version]
+Paste&copy from EOP 14 C04 (IAU2000A) - one file (1962-now), latest version
 https://datacenter.iers.org/data/latestVersion/224_EOP_C04_14.62-NOW.IAU2000A224.txt
