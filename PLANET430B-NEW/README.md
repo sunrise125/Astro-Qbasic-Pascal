@@ -3,8 +3,8 @@ It is based on highly precise SOFA algorithms for computing Solar System Bodies 
 
 For such a reason the two databases shown in figure <b>updating_2dbases.png</b> should be periodically monitored and updated. Then a new compilation is to be performed and related (a.exe, for Windows systems) formed.
 
-Find below the links to download both:
+Find below the links to download both, coming from this URL: https://www.iers.org/IERS/EN/DataProducts/EarthOrientationData/eop.html
 ### final-iers.txt
-... url-1 to be added
+https://datacenter.iers.org/data/latestVersion/10_FINALS.DATA_IAU2000_V2013_0110.txt
 ### iers1962_now.txt
-... url-2 to be added 
+https://datacenter.iers.org/data/latestVersion/224_EOP_C04_14.62-NOW.IAU2000A224.txt
