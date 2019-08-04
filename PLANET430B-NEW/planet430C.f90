@@ -134,9 +134,9 @@
                       
 
 2     continue    
-      FINAL_ = 59062       ! 2020/08/01   reported in MJD IERS FINAL_ data (for update) 
+      FINAL_ = 59070       ! Upd. Aug.04,2019 (file final-iers.txt) 
 
-      EOP_final = 58659    ! 2019/06/25 jump from IERS EOP14 C04 to IERS FINAL_ data (IAU2000).
+      EOP_final = 58666    ! Upd. Aug.04,2019 (file iers1962_now.txt)
 
 3     continue            
 10    WRITE(*,*)

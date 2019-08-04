@@ -10,3 +10,9 @@ https://datacenter.iers.org/data/latestVersion/10_FINALS.DATA_IAU2000_V2013_0110
 ### 2) iers1962_now.txt 
 Paste&copy from EOP 14 C04 (IAU2000A) - one file (1962-now), latest version
 https://datacenter.iers.org/data/latestVersion/224_EOP_C04_14.62-NOW.IAU2000A224.txt
+
+## IERS updating 
+Fortran code lines 137,139 adjusted as follows
+
+    FINAL_ = 59070       ! Aug.04,2019 (file final-iers.txt) 
+    EOP_final = 58666    ! Aug.04,2019 (file iers1962_now.txt)
