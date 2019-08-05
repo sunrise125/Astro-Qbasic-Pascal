@@ -7,9 +7,13 @@ Find below the links to download both, coming from this URL: https://www.iers.or
 ### 1) final-iers.txt 
 Paste&copy from finals.data (IAU2000), latest version
 https://datacenter.iers.org/data/latestVersion/10_FINALS.DATA_IAU2000_V2013_0110.txt
+Be careful: finals-iers.txt first row should start as follows:
+92 1 1 48622.00 I  0.182987 0.000672 ....
 ### 2) iers1962_now.txt 
 Paste&copy from EOP 14 C04 (IAU2000A) - one file (1962-now), latest version
 https://datacenter.iers.org/data/latestVersion/224_EOP_C04_14.62-NOW.IAU2000A224.txt
+Be careful: iers1962_now.txt first row should start as follows:
+1962   1   1  37665  -0.012700   0.213000  ....
 
 ## IERS updating 
 Fortran code lines 137,139 adjusted as follows
