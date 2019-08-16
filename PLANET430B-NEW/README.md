@@ -33,7 +33,7 @@ Fortran code lines 137,139 adjusted as follows
 About every year SOFA organization provides to issue a new release, mainly for minor adjustments (leap-second and similars). Last one, dated Jul.22, 2019, has been embedded in <i>1919.for</i> file and the compiled fortran code named <i>a-1919.exe</i>, for memo purposes.
 
 ### Slight modification on 1919.for
-In order to extend ephemeris date up to 2050, as per binary dbase, line around 12657 has been changed as follows:
+In order to extend ephemeris date up to 2050, as per binary dbase upper limit, line around 12657 has been changed as follows:
 <pre>
  from IF ( IY .GT. IYV+5 ) JS = 1
  to   IF ( IY .GT. IYV+30 ) JS = 1
