@@ -29,7 +29,7 @@ Fortran code lines 137,139 adjusted as follows
     FINAL_ = 59070       ! Aug.04,2019 (file final-iers.txt) 
     EOP_final = 58666    ! Aug.04,2019 (file iers1962_now.txt)
 
-### More details about SOFA libraries
+### More details on SOFA libraries
 About every year SOFA organization provides to issue a new release, mainly for minor adjustments (leap-second and similars). Last one, dated Jul.22, 2019, has been embedded in <i>1919.for</i> file and the compiled fortran code named <i>a-1919.exe</i>, for memo purposes.
 
 ### Slight modification on 1919.for
