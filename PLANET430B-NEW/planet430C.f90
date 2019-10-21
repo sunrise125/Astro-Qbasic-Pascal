@@ -1,7 +1,7 @@
  program planets
 
 !     compilation command:
-!     gfortran -w planet430C.f90 sky7.for 1818.for jpl_430.f 
+!     gfortran -w planet430C.f90 sky7.for 1919.for jpl_430.f 
 
 !     THIS PROGRAN COMPUTES THE APPARENT DIRECTION OF SOLAR SYSTEM
 !     BODY AT A SPECIFIED TIME AND IN A SPECIFIED COORDINATE SYSTEM
@@ -99,8 +99,8 @@
                      "SATURDAY" /
 
       WRITE (*,*)"  **************************************************************************"
-      WRITE (*,*)"  *     Last release of Planet, renamed planet430B, to avoid mismatches    *"
-      WRITE (*,*)"  *     New SOFA routines added into 1818.for , JPL DE430t database,       *" 
+      WRITE (*,*)"  *     Last release of Planet, renamed planet430C, to avoid mismatches    *"
+      WRITE (*,*)"  *     New SOFA routines added into 1919.for , JPL DE430t database,       *" 
       WRITE (*,*)"  *     IERS FINAL_ data (IAU2000), and EOP C01 1900-now modified          *"           
       WRITE (*,*)"  *                                                                        *"
       WRITE (*,*)"  *      --------------------planet430C.f90 -------- (Jul.30,2019) --------*"
@@ -110,17 +110,17 @@
       WRITE (*,*)"  *            for this purpose we use JPL DE430t database                 *"
       WRITE (*,*)"  *                                                                        *"
       WRITE (*,*)"  *     Compiling command:                                                 *"
-      WRITE (*,*)"  *     gfortran planet430B.f90 sky6.for 1818.for jpl_430.f                *"
+      WRITE (*,*)"  *     gfortran planet430C.f90 sky6.for 1919.for jpl_430.f                *"
       WRITE (*,*)"  *     which generates the executable file: a.out                         *"
       WRITE (*,*)"  *     You can also use the program with INTEL_FORTRAN in quadruple       *"
       WRITE (*,*)"  *     precision with the command:                                        *"
-      WRITE (*,*)"  *     ifort -r16 planet430B.f90 1818.for jpl16.for sky6.for              *"
+      WRITE (*,*)"  *     ifort -r16 planet430C.f90 1919.for jpl16.for sky7.for              *"
       WRITE (*,*)"  *     which generates the executable file: a.out                         *"
       WRITE (*,*)"  *                                                                        *"
       WRITE (*,*)"  *     Range of calendar dates:                                           *"
       WRITE (*,*)"  *      a) Not less 1900-01-01                                            *"
       WRITE (*,*)"  *      b) Not over MJD of line 128 (or nearby), i.e. FINAL_ = 58492 of   *"
-      WRITE (*,*)"  *         main file planet430B.f90.                                      *"
+      WRITE (*,*)"  *         main file planet430C.f90.                                      *"
       WRITE (*,*)"  *      c) Ephemerides computations may be forced up to 2050/01/01 upper  *"                 
       WRITE (*,*)"  *         limit of JPL database,but with less precision.                 *"
       WRITE (*,*)"  *         ------------------------------------------------------------   *" 
@@ -134,9 +134,9 @@
                       
 
 2     continue    
-      FINAL_ = 59070       ! Upd. Aug.04,2019 (file final-iers.txt) 
+      FINAL_ = 59146       ! Upd. Oct.21,2019 (file final-iers.txt) 
 
-      EOP_final = 58666    ! Upd. Aug.04,2019 (file iers1962_now.txt)
+      EOP_final = 58743    ! Upd. Oct.21,2019 (file iers1962_now.txt)
 
 3     continue            
 10    WRITE(*,*)
