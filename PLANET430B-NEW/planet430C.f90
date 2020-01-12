@@ -132,12 +132,12 @@
       WRITE (*,*)"  **************************************************************************"
       WRITE (*,*)
                       
-
+   
 2     continue    
-      FINAL_ = 59146       ! Upd. Oct.21,2019 (file final-iers.txt) 
-
-      EOP_final = 58743    ! Upd. Oct.21,2019 (file iers1962_now.txt)
-
+      FINAL_ = 59227     ! 2021/01/13   reported in MJD IERS FINAL_ data (for update) 
+                         ! Upd. Jan.12,2020 (file final-iers.txt)
+      EOP_final = 58824  ! 2019/12/07 jump from IERS EOP14 C04 to IERS FINAL_ data (IAU2000)
+                         ! Upd. Jan.12,2020 (file final-iers.txt)
 3     continue            
 10    WRITE(*,*)
       WRITE(*,*) " Input : Observer geodetic coordinate (degrees) " 
