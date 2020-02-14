@@ -1,0 +1,98 @@
+La libreria (Unit) TURTLE permette di realizzare un ambiente grafico
+alternativo all'ambiente grafico tradizionale. Esso e' noto comunemente
+come "grafica della tartaruga" e deve la sua notorieta' al fatto di essere
+uno dei prinicipali strumenti educativi previsti dal linguaggio di 
+programmmazione LOGO. Gli oggeti di questo ambiente sono:
+- i pixel dello schermo, caratterizzati dalle coordinate (x,y) di un
+  sistema di riferimento cartesiano e da uno stato costituito dal colore;
+- la tartaruga, che svolge le funzioni di cursore grafico orientato e
+  colorato il cui stato e' composto dai seguenti stati elementari:
+  - la posizione: il punto (x,y) in cui si trova la tartaruga
+  - la direzione: l'angolo espresso in gradi, che la retta orientata
+    passante per la tartaruga forma con l'asse X
+  - il colore: codificato da una costante numerica, con cui colorare
+    i pixel al passaggio della tartaruga
+  - lo stato del pennello: puo' essere alzato o abbassato, nel primo caso
+    i movimenti della tartaruga non hanno alcun effetto sui pixel (mantengono
+    il loro colore).
+Per lavorare con l'ambiente grafico della tartaruga, dopo aver dichiarato 
+nella sezione uses la unit TURTLE, utilizzare i comandi
+
+TARTAMOD 
+che inizializza l'ambiente grafico della tartaruga, selezionando la migliore
+modalita' grafica della scheda dell'elaboratore (se non presente la scheda
+non viene  attivata) e restituendo il seguente stato
+        a) tutti i pixel di colore nero (0)
+        b) tartaruga in "casa", cioe' nel punto (0,0) e direzione 0 
+           (verso est), con pennello abbassato e colore bianco (7); 
+
+AVANTI(x:real)
+fa avanzare la tartaruga di x nella direzione corrente; se il pennello e'
+abbassato i pixel incontrati sul cammino vengono colorati con il colore 
+corrente;
+
+INDIETRO(x:real);
+fa indietreggiare la tartaruga di x nella direzione corrente; se il pennello 
+e' abbassato i pixel incontrati sul cammino vengono colorati con il colore 
+corrente;
+
+SINISTRA(ang:real)
+aumenta la direzione corrente di ang gradi in senso antiorario;
+
+DESTRA(ang:real);
+decrementa la direzione corrente di ang gradi in senso antiorario;
+
+COLORE(x:word)
+imposta il colore corrente della tartaruga a x;
+
+PENNASU
+alza il pennello;
+
+PENNAGIU
+abbassa il pennello;
+
+CASA
+porta la tartaruga nelle condizioni iniziali cioe' nel punto (0,0) e 
+nella direzione 0 (verso est);
+
+INITANG(ang:real);
+imposta la direzione corrente ad ang gradi;
+
+INITPOS(x,y:real);
+imposta la posizione corrente della Tartaruga alle coordinate (x,y);
+
+MOSTRA
+visualizza la tartaruga;
+
+NASCONDI
+nasconde la tartaruga;
+
+TARTAEND
+chiude la modalita' grafica ritornando al modo testo. 
+
+
+Come funzioni di osservazione per l'ambiente Tartaruga sono disponibili:
+
+MAXX
+restituisce l'ascissa massima del riferimento cartesiano
+(l'ascissa minima e' -MAXX);
+
+MAXY
+restituisce l'ordinata massima del riferimento cartesiano
+(l'ordinata minima e' -MAXY);
+
+XVAL
+restituisce l'ascissa del punto in cui si trova la Tartaruga (coordinata
+cartesiana);
+
+YVAL
+restituisce l'ordinata del punto in cui si trova la Tartaruga (coordinata
+cartesiana);
+
+COLCOR
+restituisce il colore corrente del pennello della Tartaruga; 
+
+ANGCOR
+restituisce la direzione corrente (angolo)  della Tartaruga; 
+
+
