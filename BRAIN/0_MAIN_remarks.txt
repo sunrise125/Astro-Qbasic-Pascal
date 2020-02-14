@@ -1,0 +1,11 @@
+Main remarks
+---------
+Compilation and running PAS codes
+1) sudo -s (needs for dosemu)
+   dosemu TURBO.EXE
+2) File -> DOS Shell
+
+3) Compile with: TPC BRAIN_SC (enter) 
+     Start with:     BRAIN_SC (enter)    
+
+4) Running outside TPC: dosemu brain_sc.exe (enter)
