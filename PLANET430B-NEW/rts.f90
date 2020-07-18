@@ -3,8 +3,7 @@
 !     THIS PROGRAN COMPUTES THE APPARENT DIRECTION OF SOLAR SYSTEM
 !     BODY AT A SPECIFIED TIME AND IN A SPECIFIED COORDINATE SYSTEM
 !
-!    Compilation: gfortran -w rts.f90 sky77.for 1919.for jpl_430A.f -o rts.exe
-!
+!     Compilation: gfortran -w rts.f90 1919.for jpl_430A.f sky8.for -o rts.exe
 !
 !  - - - - - - - - - - -
       IMPLICIT NONE
@@ -99,7 +98,7 @@
 
       !  **************************************************************************
       !  *                                                                        *
-      !  *      --------------------rts_planet.f90 -------- (May.20,2020) --------*
+      !  *      --------------------trs_planet.f90 -------- (May.20,2020) --------*
       !  *                                                                        *
       !  *     THIS PROGRAN COMPUTES RISE-TRANSIT-SET OF SOLAR SYSTEM             *
       !  *     BODY AT A SPECIFIED TIME AND IN A SPECIFIED COORDINATE SYSTEM      *
@@ -181,18 +180,19 @@
 
       WRITE(*,*)""
       WRITE(*,*) "  Observer geodetic coordinate (degrees) " 
-         longit = 15.0d0
-         latit =  42.0d0 
-         height = 0.0 ! (m)
-         TC = 10d0
+         longit = 15.065d0 
+         latit =  37.0328d0  
+         height = 370d0
+         TC = 20d0
       WRITE(*,5) longit,latit,height
 5     FORMAT(3x,"Long",F9.5,2x"Latit",F9.5,2x,"height",F6.1,"m")  
     
 !--------- INPUT TIME (UTC)
-       IY = 1993; MO = 2; ID = 1
+       IY = 2021; MO = 5; ID = 1
        IH =0d0 ; IM = 0d0; SEC = 0d0        
       WRITE (*,10) "Initial UTC time  ",IY,MO,ID,IH,IM,SEC
-       IYF = 1993; MOF =3; IDF = 31
+
+       IYF = 2021; MOF =5; IDF = 15
        IH =0d0 ; IM = 0d0; SEC = 0d0     
       WRITE (*,10) "Final UTC time    ", IYF,MOF,IDF,IH,IM,SEC
 10    FORMAT(3x,A16,x,I4,"/",I2,"/",I2,4x,I2,":",I2,":",F6.3)
@@ -223,11 +223,11 @@
                  ==================================================="
      ELSE IF(NTARG /= 10) THEN
       WRITE (*,*)"    TIME       RISE (UT)     TRANSIT (UT)   SET (UT)     Azimuth  Elev.   Azimuth     RA 0.0h      &
-                  DEC 0.0h    RA(transit)   DEC(transit)   "
+                  DEC 0.0h    RA(transit)   DEC(transit)        DIST."
       WRITE (*,*)"     UT                                                   RISE   TRANSIT   SET       (app.geoc)   &
-                 (app.geoc)       UT             UT  " 
+                 (app.geoc)       UT             UT              AU  " 
       WRITE (*,*)"============================================================================================================&
-                 ===================================="
+                 ==================================================="
     END IF  
 
      DO JJ = 1, NUM   
@@ -628,9 +628,15 @@
       PDIAM = PDIAM * DR2AS /( DIST1 * AU/1000D0 )
 
       IF ( NTARG == 11 ) THEN
-       DIAM = 1919.29D0 / DIST1
+       DIAM = 1919.29D0 / DIST1 *60D0
        ILL = 1.0D0 *100D0
+      ELSE IF (NTARG == 10) THEN
+       DIAM = (1737.53D0 * 2D0 * DR2AS /( DIST1 * AU )* 1000d0/60d0) 
       END IF
+ !     (NTARG == 10) THEN
+ !     DIAM = (1737.53D0 * 2D0 * DR2AS /( DIST1 * AU )* 1000d0/60d0) ! arcmin-Topoc.Moon Diam. 
+ !     END IF
+  
 !--------------------------------------------------------------------------------------------------
 !     RELATIVISTIC DEFLECTION OF LIGHT due the Sun,Saturn and Jupiter ( for apparent geocentric coordinate)
  
@@ -702,11 +708,17 @@
        
        TDB0 = INT(MJD) + DJMJD0   
        AUM = AU/1000D0
-       PL = ASIN(6378.137/(DIST1 * AUM)) * DR2D  ! Lunar horizontal parallax 
-       SD = (DIAM / 3600D0 ) / 2D0               ! Lunar semidiameter in arcmin
-               
-       CALL TRANSIT(NTARG,TDB0,GAST0,AUDAY,DELTAT,PL,SD,LAT,LONG, &
-            RNPB0,RIS,SET,TRS,azm1,azm2,HAL,aS,N0,MS,PT)
+       PL = ASIN(6378.137/(DIST1 * AUM)) * DR2D  ! Lunar horizontal parallax (degs)
+   
+       SD = (DIAM / 60D0 ) / 2D0               ! Lunar semidiameter in degs.
+ 
+           
+!       CALL TRANSIT(NTARG,TDB0,GAST0,AUDAY,DELTAT,PL,SD,LAT,LONG, &
+!            RNPB0,RIS,SET,TRS,azm1,azm2,HAL,aS,N0,MS,PT)
+       CALL TRANSIT(NTARG,TDB0,GAST0,AUDAY,DELTAT,PL,SD,LAT,LONG,DX00,DY00,RIS,SET,TRS,  &
+            azm1,azm2,HAL,As,N0,MS,PT) 
+
+
             
       TRSJ = TRS/24d0 + JD                             ! Transit in UTC
       JTRS = (TRSJ + (32.184D0 + DAT)/86400D0)         ! Transit in JD (TT)
@@ -922,10 +934,12 @@
       
       IF (NTARG == 10) THEN
        DISTKm = DIST1 * AUM
-      END IF
+      
 !       CALL moon ( ET,IY,MO,ID,DPSI,RA6,DE6,DISTKm,R_sun,D_sun,RA7,DE7,OBL,GD1,PL,HLON,HLAT, &
 !                OMEGA,OME0,AGE,JHE,CHI,JAP,APE,DLR,TLong,TLat,LTL,LTB,PA,THL,THB)
-!    print*,"AGE---",AGE 
+      MJ = 2400000.5d0
+      PH = ASIN(6378.137d0 / DLR)        ! APOGEE- PERIGEE Horizontal lunar parallax. (radians)
+     END IF 
 
 !------ calculating of the lunar phase of New Moon
   
@@ -976,7 +990,7 @@
       
       GOTO 55
 
-50    WRITE (*,80)IY, MO, ID,IHMSF1,AS1,IHMSF3,AS3,IHMSF2,AS2,azm1,HAL,azm2,IHMSF6,sign2,IDMSF6,IHMSF0,AS3,sign1,IDMSF0,AS3                   
+50    WRITE (*,80)IY, MO, ID,IHMSF1,AS1,IHMSF3,AS3,IHMSF2,AS2,azm1,HAL,azm2,IHMSF6,sign2,IDMSF6,IHMSF0,AS3,sign1,IDMSF0,AS3,DIST1                   
       
 55       IF ( JJ == NUM ) THEN
           GOTO 60
@@ -995,7 +1009,7 @@
 
 80    FORMAT ( x,I4,"/",I2,"/",I2,2x,I3,2(":",I2.2),".",I1.1,a2,2x,I3,2(":",I2.2),".",I1.1,a2,2X,I3,2(":",I2.2),  &
           ".",I1.1,a2,2X,F6.2,"°",2X,F5.2,"°",2X,F6.2,"°",2x,I3,2(":",I2.2),".",I1.1,2x,a,I3,2(":",I2.2),".",I1.1,2x,I3,2 &
-          (":",I2.2),"." ,I1.1,a,2x,a,I3,2(":",I2.2),".",I1.1,a )
+          (":",I2.2),"." ,I1.1,a,2x,a,I3,2(":",I2.2),".",I1.1,a,2x,F13.10 )
                      
 
  END program planets
