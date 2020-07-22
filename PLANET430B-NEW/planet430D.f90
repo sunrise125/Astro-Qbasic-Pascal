@@ -41,7 +41,7 @@
       INTEGER IHMSF1(4),IHMSF2(4),IHMSF3(4),IHMSF(4),IDMSF(4), IDMSF0(4),IHMSF4(4),IHMSF5(4),IHMSF6(4),Rtoday,YN
       INTEGER FINAL_,JW,EQTM,IY4, IM4, ID4,IDMSF1(4),d_d,h_h,m_m,conta,Dtoday,Mtoday,Ytoday,MJDtoday
       INTEGER IY1, IM1, ID1,IY2, IM2, ID2, IY3, IM3, ID3,IHMSF7(4),IHMSF8(4),NR,MS,PT,LX,LM,LN
-      INTEGER IHMSF10(4),IHMSF11(4),IHMSF12(4),IHMSF13(4),IHMSF14(4),IHMSF15(4)
+      INTEGER IHMSF10(4),IHMSF11(4),IHMSF12(4),IHMSF13(4),IHMSF14(4),IHMSF15(4),N1,N2,N3
       integer,dimension(8) :: VALUES
       DOUBLE PRECISION SEC,XP,YP,DUT,TT,TCB1,TCB2,T,AU,PS,DEL,HA,TDB,Ltime,TDB1,TDB2,TDB0,OBL,s_s
       DOUBLE PRECISION  UT11, UT12, UT,TAI1, TAI2, TT1, TT2, TCG1, TCG2,RVETT,xs,ys,pas,UTC1, UTC2,UTC 
@@ -88,7 +88,7 @@
       CHARACTER(len=26):: body,planet,LDUT,LDET,EQ_label,Slod
       CHARACTER(len=1):: sign,aS,lS,bS,update,NEW,str,AS1,AS2,AS3
       CHARACTER(len=95):: equinox,equinox2,equinox3,commentR,commentS,commentT,commentU,labelL
-      CHARACTER(len=95):: commentM,commentN,commentA
+      CHARACTER(len=95):: commentM,commentN,commentA,commentP
       CHARACTER(len=7):: APE 
       CHARACTER(len=14):: comment 
       common SGE,RVET0,HSV                   
@@ -913,14 +913,15 @@
        PL = ASIN(6378.137/(DIST1 * AUM)) * DR2D  ! Lunar horizontal parallax 
        SD = (DIAM / 60D0 ) / 2D0               ! Lunar semidiameter in degs
       END IF 
-!    print*," SD - PL--",SD,PL, SD-PL          
+               
        CALL TRANSIT(NTARG,TDB0,GAST0,AUDAY,DELTAT,PL,SD,LAT,LONG,DX00,DY00,RIS,SET,TRS,  &
             AZM1,AZM2,HAL,As,NR,MS,PT,LX,LM,LN) 
 
-      IF(NTARG == 11) THEN
+     IF(NTARG == 11) THEN
       CALL TWILIGHT(NTARG,TDB0,GAST0,AUDAY,DELTAT,LAT,LONG,DX00,DY00,Ha, &
-           BCTW,ECTW,BNTW,ENTW,BASTW,EASTW)
-      END IF   
+           BCTW,ECTW,BNTW,ENTW,BASTW,EASTW,N1,N2,N3)
+     END IF  
+      
 !----------------------------------------------------------------------------------------------
 
 !---------- Form apparent geocentric coordinate (RA6,DE6)       
@@ -1196,7 +1197,9 @@
        CALL iau_D2TF ( 1, RIS, SIGN, IHMSF1)     
        CALL iau_D2TF ( 1, SET, SIGN, IHMSF2)
        CALL iau_D2TF ( 2, TRS, SIGN, IHMSF3)
-       
+
+!------Search  civil,nautical,astronomical TWILIGHT   
+    
       IF(NTARG == 11)THEN 
        CALL iau_D2TF ( 1, BCTW, SIGN, IHMSF10)     
        CALL iau_D2TF ( 1, ECTW, SIGN, IHMSF11)
@@ -1204,17 +1207,26 @@
        CALL iau_D2TF ( 1, ENTW, SIGN, IHMSF13)     
        CALL iau_D2TF ( 1, BASTW, SIGN, IHMSF14)
        CALL iau_D2TF ( 1, EASTW, SIGN, IHMSF15)
-      END IF
-
-        IF (LX == 1 ) THEN
-         commentM = ' ************** '
+      
+       IF(N1 == 1 .or. N2 == 1 .or. N3 == 1) THEN               ! Twilight parameter
+          commentP = '---- 00:00:00.0 =   CONTIUOUS TWILIGHT --- '
+        ELSE IF(N1 == 0 .and. N2 == 0 .and. N3 == 0) THEN
+          commentP = ""
+       END IF
+      ELSE IF (NTARG /= 11) THEN
+          commentP = ""
+      END IF 
+           
+        IF (LX == 1 ) THEN                                      ! Rising,Setting Transit parameter
+         commentM = '    ---- Body circumpolar -----   '
         ELSE IF (LX == 0) THEN
          commentM = ""
         END IF
         IF(LM == 1) THEN
-         commentN = ' .... BRIGHT .... '
+         commentN = '--- CONTIUOUS TWILIGHT --- '
          ELSE IF (LM == 2) THEN
-         commentN = ' .... NO SET - body always up the horizon '
+         commentN = ' .... NO SET - SUN always up the horizon '
+         commentP = ""
          ELSE IF (LM == 0) THEN
          commentN = " "
         END IF
@@ -1226,7 +1238,7 @@
           commentA =  " "
         END IF 
 
-        IF ( NR == 1 )THEN
+        IF ( NR == 1 )THEN                                       
            AS1 = "* "
            commentR = '** Rise - event occurs the next day'
          ELSEIF ( NR == 2) THEN
@@ -1256,6 +1268,7 @@
            AS3 = " " 
            commentT = ""
         END IF
+
 
 !-----------------------------------------------------------------------------------       
        IF (NTARG == 6 ) THEN
@@ -1317,16 +1330,16 @@
       DLA = -KA*SIN(GELA)*(SIN(Lsun-GELO)-ECC*SIN(PHE-GELO))             ! Difference in Latitude (arcsec)
 
       IF (NTARG == 10)THEN
-       GELOAP = GELO !+ DPSI  
-       GELAAP = GELA !+ DEPS
+       GELOAP = GELO   
+       GELAAP = GELA 
 
       ELSE IF(NTARG < 10) THEN
-       GELOAP = GELO !+ DPSI+(DLO/DIST1) * AS2R   ! GELOAP = Geocentric Apparent Ecliptic longitude mean the date(rad).             
-       GELAAP = GELA !+ DEPS + DLA * AS2R         ! GELAAP = Geocentric Apparent Ecliptic latitude mean the date rad).  
+       GELOAP = GELO                       ! GELOAP = Geocentric Apparent Ecliptic longitude mean the date(rad).             
+       GELAAP = GELA                       ! GELAAP = Geocentric Apparent Ecliptic latitude mean the date rad).  
 
       ELSE IF(NTARG == 11) THEN
-       GELOAP = GELO !+ DPSI+(DLO/DIST1) * AS2R 
-       GELAAP = GELA !+ DEPS *AS2R                         
+       GELOAP = GELO 
+       GELAAP = GELA                          
       END IF
 
       GELOD = GELO * DR2D                 ! GELOD = Geocentric - Ecliptic longitude mean the date. (degrees) 
@@ -1643,13 +1656,16 @@
       WRITE (*,41) "        Azimuth                    Altitude                 Azimuth                              " 
       WRITE (*,43) AZM1,HAL,As,AZM2 
       WRITE (*,*)
+             IF (NTARG == 11) THEN
       WRITE (*,41)"               MORNING                                          EVENING                           " 
       WRITE (*,70)IHMSF10,IHMSF11
       WRITE (*,71)IHMSF12,IHMSF13
       WRITE (*,72)IHMSF14,IHMSF15
+             END IF
       WRITE(*,*)
       WRITE (*,47) 
-      WRITE (*,44)planet
+      WRITE (*,44)planet                             
+      WRITE (*,239) commentP
       WRITE (*,39) commentR
       WRITE (*,39) commentS
       WRITE (*,39) commentT 
@@ -1694,6 +1710,7 @@
 43    FORMAT ( 9X,F5.1,"°",22X,F4.1,"°",a,19X,F5.1,"°")
 44    FORMAT (10x," The",1x,A10,1x,A90)
 39    FORMAT (25x,A45) 
+239   FORMAT (25x,A45)
 45    FORMAT (25x,A45)
 46    FORMAT (25x,A45) 
 47    FORMAT (5x," *** NOTES *** ")
@@ -2291,9 +2308,10 @@
       
       
       IF (NTARG == 11) ELONG = 0.0D0    
-!----------------------------------------------------------------
+!------------------------------------------------------------------------------
 
-!--------- Compute  -TDB0- JD Time to 0.0 h TDB the day (for routine TRANSIT)
+
+!--------- Compute  -TDB0- JD Time to 0.0 h TDB the day (for routine TRANSIT and TWILIGHT)
 
         TDB0 = INT(MJD) + DJMJD0  
        
@@ -2312,7 +2330,7 @@
        CALL iau_D2TF ( 1, TRS, SIGN, IHMSF3)
        
        IF (LX == 1 ) THEN
-         commentM = ' ************** '
+         commentM = '      ------ Body circumpolar ----- '
         ELSE IF (LX == 0) THEN
          commentM = ""
         END IF
@@ -2362,9 +2380,9 @@
            commentT = ""
        END IF
       
-      IF(NTARG == 11) THEN
+     IF(NTARG == 11) THEN
       CALL TWILIGHT(NTARG,TDB0,GAST0,AUDAY,DELTAT,LAT,LONG,DX00,DY00,Ha, &
-           BCTW,ECTW,BNTW,ENTW,BASTW,EASTW)
+           BCTW,ECTW,BNTW,ENTW,BASTW,EASTW,N1,N2,N3)
       
       CALL iau_D2TF ( 1, BCTW, SIGN, IHMSF10)     
       CALL iau_D2TF ( 1, ECTW, SIGN, IHMSF11)
@@ -2372,7 +2390,20 @@
       CALL iau_D2TF ( 1, ENTW, SIGN, IHMSF13)     
       CALL iau_D2TF ( 1, BASTW, SIGN, IHMSF14)
       CALL iau_D2TF ( 1, EASTW, SIGN, IHMSF15)  
-      END IF
+      
+        IF(N1 == 1 .or. N2 == 1 .or. N3 == 1) THEN               ! Twilight parameter
+          commentP = '---- 00:00:00.0 =   CONTIUOUS TWILIGHT --- '
+        ELSE IF(N1 == 0 .and. N2 == 0 .and. N3 == 0) THEN
+          commentP = ""
+        END IF
+       ELSE IF (NTARG /= 11) THEN
+          commentP = ""
+     END IF 
+
+        IF(LM == 2) THEN
+          commentP = " " 
+        END IF
+
 !====================================================================================================
 
 !---------- Output.
@@ -2528,14 +2559,17 @@
       WRITE (*,141) "        Azimuth                    Altitude                 Azimuth                              " 
       WRITE (*,143) AZM1,HAL,As,AZM2 
       WRITE (*,*)
+            IF(NTARG == 11)THEN 
       WRITE (*,141)"               MORNING                                          EVENING                           "         
       WRITE (*,270)IHMSF10,IHMSF11
       WRITE (*,271)IHMSF12,IHMSF13
       WRITE (*,272)IHMSF14,IHMSF15
+            END IF
       WRITE (*,*)
       WRITE (*,*)
       WRITE (*,147) 
       WRITE (*,144)planet,commentR
+      WRITE (*,145)commentP 
       WRITE (*,145)commentS
       WRITE (*,145)commentT
       WRITE (*,146)commentM

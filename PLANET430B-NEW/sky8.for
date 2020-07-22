@@ -4996,11 +4996,11 @@ c#####################################################################
 
       AGE = TDB - JH0               !AGE ,age of last New Moon (day)
 !      print*,"TDB,JH0",TDB,JH0    
-!      If (AGE < 0) Then
-!       AGE = 29.4 + AGE
-!      ElseIf (AGE > 29.530589) Then
-!       AGE = AGE - 29.530589
-!      End if
+      If (AGE < 0) Then
+       AGE = 29.4 + AGE
+      ElseIf (AGE > 29.530589) Then
+       AGE = AGE - 29.530589
+      End if
   
 !--------Compute Moon's Apogee and Perigee.
   
@@ -5931,10 +5931,7 @@ C----------------------------------------------------------------------------
 C--------------------------------------------------------------------------------------------
 
       subroutine TWILIGHT(NTARG,TDB0,GST0,AUDAY,DELTAT,LAT,LONG,
-     . DX00,DY00,Ha,tw1,tw2,tw3,tw4,tw5,tw6)
-       
-     
-
+     . DX00,DY00,Ha,tw1,tw2,tw3,tw4,tw5,tw6,n1,n2,n3)
 
 !     This program compute the times of transit,rise and set of body
 !     of the solar sistem , this algorithm takes in account the atmospheric
@@ -5980,13 +5977,13 @@ C-------------------------------------------------------------------------------
        PARAMETER ( DR2AS = 206264.8062470963551564734D0 )
 
 
-      INTEGER NTARG,C
-      DOUBLE PRECISION TDB0,GST0,AUDAY,LAT,LONG
+      INTEGER NTARG,C,I,n1,n2,n3,flag,L,M,N
+      DOUBLE PRECISION TDB0,GST0,AUDAY,LAT,LONG,H(3),Z(3)
       DOUBLE PRECISION RA3,R2,R3,R6,R8,R9,R10,DE3,D2,D3,D6,D8,D9,D10
       DOUBLE PRECISION H00,H0,delta,Ha,m12,m13,m22,m23,tw6
-      DOUBLE PRECISION COH00,DELTAT,h_,m,m1,m2,m_,m_m,newm,oldm,m0
-      DOUBLE PRECISION DX00,DY00,H02,H03,azm,HN,HAS,COH2,COH3
-      DOUBLE PRECISION HC,COH1,H01,m11,m21,tw1,tw2,tw3,tw4,tw5
+      DOUBLE PRECISION COH00,DELTAT,h_,m1,m2,newm,oldm,m0
+      DOUBLE PRECISION DX00,DY00,H02,H03,azm,HN,HAS,COH2,COH3,COH1
+      DOUBLE PRECISION HC,H01,m11,m21,tw1,tw2,tw3,tw4,tw5
             
       if(NTARG .EQ. 11) then
        H0 = (90d0 ) * DD2R  !+ 0.833333333d0
@@ -5995,87 +5992,117 @@ C-------------------------------------------------------------------------------
        HAS = 108d0 * DD2R
       endif
       
+      H(1) = HC
+      H(2) = HN
+      H(3) = HAS
+
+      flag = -1
       if(LAT .GT. 1.4 .OR. LAT .LT. -1.4) goto 300
 
       call COORD(NTARG,TDB0,AUDAY,DX00,DY00,RA3,R2,R3,R6,R8,R9,       
      .  R10,DE3,D2,D3,D6,D8,D9,D10)
        
-      COH00 = (cos(H0) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))     !Horizon observer
-      COH1 = (cos(HC) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))      !Civil twilight
-      COH2 = (cos(HN) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))      !Nautical twilight
-      COH3 = (cos(HAS) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))     !Astronomical twilight
-
-C---------------
+      COH00 = (cos(H0) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))       !Horizon observer
       m0 = (RA3 - LONG - GST0) / D2PI
       m0 = modulo (m0,1d0)
+      H00 = acos(COH00)                                                     !Horizon observer
+      H00 = modulo(H00,PI)
+      m1 = m0 - H00 / D2PI
+      m1 = modulo(m1,1d0)
+      m2 = m0 + H00 / D2PI
+      m2 = modulo(m2,1d0)  
+                                                 
+!------Compute Civil Twilight -------------------------------------------------------------------
+
+      COH1 = (cos(HC) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))      !Civil twilight
       
-       H00 = acos(COH00)                    !Horizon observer
-       H00 = modulo(H00,PI)
-       H01 = acos(COH1)                     !Civil twilight
-       H01 = modulo(H01,PI)
-       H02 = acos(COH2)                     !Nautical twilight
-       H02 = modulo(H02,PI)
-       H03 = acos(COH3)                     !Astronomical twilight
-       H03 = modulo(H03,PI)
+       IF(COH1 .LE. -1.0d0) THEN
+        tw1 = 0; tw2 = 0; n1 = 1 
+        GOTO 300
+       ELSE
+        tw1 = tw1; tw2 = tw2; n1 = 0
+       END IF
 
-       m1 = m0 - H00 / D2PI
-       m1 = modulo(m1,1d0)
-       m2 = m0 + H00 / D2PI
-       m2 = modulo(m2,1d0)
-
-       m11 = m0 - H01 / D2PI                ! Begin civil twilight
-       m11 = modulo(m11,1d0)
-       m21 = m0 + H01 / D2PI                ! End civil twilight
-       m21 = modulo(m21,1d0)
-
-       m12 = m0 - H02 / D2PI                ! Begin nutical twilight
-       m12 = modulo(m12,1d0)
-       m22 = m0 + H02 / D2PI                ! End nautical twilight
-       m22 = modulo(m22,1d0)
-
-       m13 = m0 - H03 / D2PI                ! Begin astronomical twilight
-       m13 = modulo(m13,1d0)
-       m23 = m0 + H03 / D2PI                ! End astronomical twilight
-       m23 = modulo(m23,1d0)
-
-C------- Compute civil,nautical,astronomical twilight
-      oldm = m11
+      H01 = acos(COH1)                     
+      H01 = modulo(H01,PI)
+      m11 = m0 - H01 / D2PI                                                 ! Begin civil twilight
+      m11 = modulo(m11,1d0)
+      m11 = m11
       C = 1
-      call Interpol(GST0,oldm,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! begin civil twilight = tw1
-     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HC,newm,Ha,delta,azm)
-      tw1 = newm 
-            
-      oldm = m21
+      call Interpol(GST0,m11,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! begin civil twilight = tw1
+     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HC,tw1,Ha,delta,azm)
+      tw1 = tw1 
+      
+      m21 = m0 + H01 / D2PI                                                 ! End civil twilight
+      m21 = modulo(m21,1d0)
+      m21 = m21
       C = 1
-       call Interpol(GST0,oldm,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! end civil twilight = tw2
-     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HC,newm,Ha,delta,azm)
-      tw2 = newm 
-     
-      oldm = m12
+       call Interpol(GST0,m21,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! end civil twilight = tw2
+     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HC,tw2,Ha,delta,azm)
+      tw2 = tw2 
+
+!------Compute Nautical Twilight -------------------------------------------------------------------
+
+
+      COH2 = (cos(HN) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))      !Nautical twilight
+      
+       IF(COH2 .LE. -1.0d0) THEN
+        tw3 = 0; tw4 = 0;  n2 = 1
+        GOTO 300
+       ELSE
+        tw3 = tw3; tw4 = tw4; n2 = 0
+       END IF
+
+      H02 = acos(COH2)                     !
+      H02 = modulo(H02,PI)
+      m12 = m0 - H02 / D2PI                                                 ! Begin nutical twilight
+      m12 = modulo(m12,1d0)
+      m12 = m12
       C = 1 
-       call Interpol(GST0,oldm,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! begin nautical twilight = tw3
-     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HN,newm,Ha,delta,azm)
-      tw3 = newm 
+       call Interpol(GST0,m12,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! begin nautical twilight = tw3
+     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HN,tw3,Ha,delta,azm)
+      tw3 = tw3 
+       
+      m22 = m0 + H02 / D2PI                                                 ! End nautical twilight
+      m22 = modulo(m22,1d0)
+      m22 = m22
+      C = 1
+       call Interpol(GST0,m22,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! end nautical twilight = tw4
+     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HN,tw4,Ha,delta,azm)
+      tw4 = tw4 
+
+!------Compute Astronomical Twilight -------------------------------------------------------------------
+
+      COH3 = (cos(HAS) - sin(LAT) * sin(DE3)) / (cos(LAT) * cos(DE3))     !Astronomical twilight
       
-      oldm = m22
+       IF(COH3 .LE. -1.0d0) THEN
+        tw5 = 0; tw6 = 0; n3 = 1
+        GOTO 300
+       ELSE
+        tw5 = tw5; tw6 = tw6; n3 = 0
+       END IF
+
+      H03 = acos(COH3) 
+      H03 = modulo(H03,PI)
+      m13 = m0 - H03 / D2PI                ! Begin astronomical twilight
+      m13 = modulo(m13,1d0)      
+      m13 = m13
       C = 1
-       call Interpol(GST0,oldm,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! end nautical twilight = tw4
-     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HN,newm,Ha,delta,azm)
-      tw4 = newm 
-             
-      oldm = m13
+       call Interpol(GST0,m13,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! begin astronomical twilight = tw5
+     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HAS,tw5,Ha,delta,azm)
+      tw5 = tw5       
+
+      m23 = m0 + H03 / D2PI                ! End astronomical twilight
+      m23 = modulo(m23,1d0)
+      m23 = m23
       C = 1
-       call Interpol(GST0,oldm,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! begin astronomical twilight = tw5
-     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HAS,newm,Ha,delta,azm)
-      tw5 = newm 
-             
-      oldm = m23
-      C = 1
-       call Interpol(GST0,oldm,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! end astronomical twilight = tw6
-     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HAS,newm,Ha,delta,azm)
-      tw6 = newm 
+       call Interpol(GST0,m23,DELTAT,RA3,R2,R3,R6,R8,R9,R10,DE3,    ! end astronomical twilight = tw6
+     .     D2,D3,D6,D8,D9,D10,LONG,LAT,C,HAS,tw6,Ha,delta,azm)
+      tw6 = tw6 
       
 300   end
+     
+             
 C----------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -6137,7 +6164,7 @@ C-------------------------------------------------------------------------------
       DOUBLE PRECISION trn,T,H00,H0,azm,azm1,azm2,delta,Ha,alt,M01
       DOUBLE PRECISION COH00,DELTAT,h_,m,m1,m2,m_,m_m,newm,oldm,m0
       DOUBLE PRECISION rise,s_,set_,settime,trntime,DX00,DY00
-      DOUBLE PRECISION T1,T2,T3,RIS,SET,TRL,TR,MMM        
+      DOUBLE PRECISION T1,T2,T3,RIS,SET,TRL,TR,MMM ,Z(3)       
       CHARACTER * 45 labelR,labelS,labelT,SIDE,labelM,labelN,labelX
       CHARACTER * 45 labelY
       CHARACTER * 1 aS,labelO
@@ -6161,7 +6188,7 @@ C-------------------------------------------------------------------------------
 
       if (COH00 .LT. -1d0) then
        LX = 1
-       labelX = ' ************** '
+       labelX = '   ---- Body circumpolar ----   '
        if ((H0 * DR2D) .GE. 96d0) then
         labelM = ' .... BRIGHT .... '
         LM = 1
@@ -6595,9 +6622,6 @@ C-------------------------------------------------------------------------------
 
       END
 !-------------------------------------------------------------------------------------------
-
-
-
 
 
 
