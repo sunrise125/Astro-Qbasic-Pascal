@@ -1,4 +1,0 @@
-Compilation command:
-
-gfortran -w planet430B.f90 1818.for jpl_430.f sky6.for
-------------------------------------------------------
