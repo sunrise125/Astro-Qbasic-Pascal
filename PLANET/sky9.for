@@ -15,12 +15,12 @@ C Bulletin A , between lines 38 - 46
 
       implicit none
 
-      DOUBLE PRECISION  XP,YP,DUT1,X1,Y1,RJDINT,UTC,MJD,RJD(7)        
+      DOUBLE PRECISION  XP,YP,DUT1,X1,Y1,RJDINT,UTC,RJD(7)        
       DOUBLE PRECISION YEAR,X(7),Y(7),UT1(7),rjd_int
       DOUBLE PRECISION JD,DATE,Xx,Yy,DUT,x_int,y_int,ut1_int
       DOUBLE PRECISION dX,dY,DDX(7),DDY(7),DEX,DEY,lo_d
-      DOUBLE PRECISION Ra,Rb,Rc,Rd,Re,Rf,DDT(7)
-      INTEGER A,I,A1,N,J,FINAL,EOP_final                        
+      DOUBLE PRECISION Ra,Rb,Rc,Rd,Re,Rf,DDT(7),h,k,l,m,o,p
+      INTEGER A,I,A1,N,J,FINAL,EOP_final,MJD                        
       INTEGER aa,bb,cc,ios,loop,MJD_62,date1,date2
       character(len=1):: B,B1,dd,ee,ff  
       INTEGER E(7)
@@ -40,8 +40,9 @@ C    Open database  "iers1962_now"
       
 C------ Use iers1962_now (IAU2000) EOP14 C04 Data- 
 C      read (unit=14,fmt="(3(i4),i7,2(f11.6),2(f12.7),2(f11.6))",
-      read (unit=15,fmt="(3(i4),x,f6.0,2(f11.6),2(f12.7),2(f11.6))",
-     .  iostat=ios)aa,bb,cc,MJD,Xx,Yy,DUT,lo_d,dX,dY
+      read (unit=15,fmt="(3(I4),I7,2(F11.6),2(F12.7),2(F11.6),2(F11.6),
+     .  2(F11.7),2(F12.6))",iostat=ios)aa,bb,cc,MJD,Xx,Yy,DUT,lo_d,
+     .  dX,dY,h,k,l,m,o,p
     
       if (ios==0) then 
        continue
@@ -62,7 +63,7 @@ C      read (unit=14,fmt="(3(i4),i7,2(f11.6),2(f12.7),2(f11.6))",
         DDT(I) = lo_d *1000D0
         DDX(I)= dX *1000D0
         DDY(I)= dY *1000D0 
-!       print*,"UT1(I)",UT1,DUT
+
        end if
        end do
       end do
@@ -896,7 +897,7 @@ C CORRECTIONS
       DOUBLE PRECISION EBT(3,2),SB(3,2),PV(3,2),EB(3),BODY_H(3),BGV(3)
       DOUBLE PRECISION PV1(3),EBP(3),HE(3),GE(3),RQ(3),RS(3),BODY_G(3)
       DOUBLE PRECISION BVE(3),GV(3),BV1(3),EBV(3),UB(3,2),UV(3,2)
-      DOUBLE PRECISION EPV(3,2),GK
+      DOUBLE PRECISION EPV(3,2),GK,HEP(3)
 
       C  = 299792458D0                     ! speed of light  m/s 
       AU = 149597870691D0                  ! Astronomical Unit (meter)(TDB)
@@ -919,6 +920,8 @@ C CORRECTIONS
       
       CALL PLEPH ( XET, 3, 11, EPV)            ! EPV = Earth heliocentric state vector
 
+      CALL iau_PVUP (DT,EPV,HEP)               ! HEP = Earth Heliocentric position         
+
       CALL iau_PVMPV(PV,SB,UB)                 ! UB = Body's heliocentric state vector 
       
       CALL iau_PVUP (DT,PV,PV1)                ! PV1 = body's barycentric  position  
@@ -935,11 +938,13 @@ C CORRECTIONS
 
       CALL iau_PMP (BV1,BVE,BGV)               ! BGV Body's Geocentric velocity  
 
-!-----Form modulus of HE , GE
+!-----Form modulus of HE , GE, HEP
       
       CALL iau_PM(HE,HD)         ! HD modulus Heliocentric position body
 
       CALL iau_PM(GE,GD)         ! GD modulus Geocentric position Earth
+
+      CALL iau_PM(HEP,HMOD)
       
       IF (DET .EQ. 0D0) THEN
         THD = HD                 ! THD True Heliocentric distance
@@ -2640,10 +2645,10 @@ C CORRECTIONS
               SINZD0 = DSIN ( ZD0 * DEGRAD )
               COSZD0 = DCOS ( ZD0 * DEGRAD )
 *             COMPUTE REFRACTED POSITION VECTOR
-              DO 50 J = 1, 3
-  50          PR(J) = ( ( P(J) - COSZD0 * UZ(J) ) / SINZD0 ) * SINZD
+              DO  J = 1, 3
+              PR(J) = ( ( P(J) - COSZD0 * UZ(J) ) / SINZD0 ) * SINZD
      .                 +                  UZ(J)              * COSZD   
-
+              END DO
 *             COMPUTE REFRACTED RIGHT ASCENSION AND DECLINATION
               PROJ = DSQRT ( PR(1)**2 + PR(2)**2 )
               RAR = 0.D0
@@ -6568,17 +6573,13 @@ C-------------------------------------------------------------------------------
                                       ! RA8  RA corrected for refraction (degrees)
                                       ! DE8  DEC corrected for refraction (degrees)
 
-      RH = 0.5                             ! relative humidity at the observer (range 0-1)
-      WL = 0.55                            ! wavelength (micrometers)
-      TSL = 20.0                           ! Is the approximate sea-level air temperature in K"
-      PHPA = 1013.25 * exp ( -HM / ( 29.3 * TSL ) )! pressure at the observer (hPa = mB
-!      XPO = 5.3514888776967492D-003
-!      YPO = 0.17408071571777148d0
-!      RA7H =3.8882238610553252d0
-!      DE7D = 20.250555665198636d0
+      RH = 0.5D0                                      ! relative humidity at the observer (range 0-1)
+      WL = 0.55D0                                     ! wavelength (micrometers)
+      TSL = 20.0D0                                    ! Is the approximate sea-level air temperature in K"
+      PHPA = 1013.25D0 * exp ( -HM / ( 29.3D0 * TSL ) )! pressure at the observer (hPa = mB
 
       DET = DELTA
-      CALL REFDAT (PHPA,TC,0.0,WL)
+      CALL REFDAT (PHPA,TSL,0D0,WL)
       CALL SETDT ( DET) 
 !      DUT = (UT1+2400000.5d0 - TIME)*86400d0  
       IF(TT > FINAL) THEN
@@ -6645,7 +6646,7 @@ C     Open database  "city_coord.txt"
       
       DO I = 1,430 
 
-      read (unit=11,fmt="(i4,2x,f9.4,4x,f8.4,2x,i4,2x,a19,4x,a70)"  
+      read (unit=11,fmt="(i4,f11.4,f11.4,i7,2x,a19,3x,a71)"  
      . ,iostat=ios)N,lo,la,he,zo,si
       
        IF(I == num) THEN 
@@ -6662,69 +6663,4 @@ C     Open database  "city_coord.txt"
       end
 
 !----------------------------------------------------------------------------
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
