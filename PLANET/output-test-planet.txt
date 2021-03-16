@@ -1,0 +1,294 @@
+C:\Training\PLANET>2020.exe
+   **************************************************************************
+   *     Last release of Planet, renamed planet430F, to avoid mismatches    *
+   *     New SOFA routines added into 2121.for , JPL DE430t database,       *
+   *     IERS FINAL_ data (IAU2000), and EOP C01 1900-now modified          *
+   *                                                                        *
+   *      --------------------planet430F.f90 -------- (Mar.12,2021) --------*
+   *                                                                        *
+   *     THIS PROGRAN COMPUTES THE APPARENT DIRECTION OF SOLAR SYSTEM       *
+   *     BODY AT A SPECIFIED TIME AND IN A SPECIFIED COORDINATE SYSTEM      *
+   *            for this purpose we use JPL DE430t database                 *
+   *                                                                        *
+   *     Compiling command:                                                 *
+   *     gfortran planet430F.f90 sky9.for 2121.for jpl_430.f                *
+   *     which generates the executable file: a.out                         *
+   *                                                                        *
+   *     Range of calendar dates:                                           *
+   *      a) Not less 1900-03-01                                            *
+   *      b) Not over MJD of line 150 (or nearby), i.e. FINAL_ = 58492 of   *
+   *         main file planet430F.f90.                                      *
+   *      c) Ephemerides computations may be forced up to 2100/01/01 upper  *
+   *         limit of JPL database,but with less precision.                 *
+   *         ------------------------------------------------------------   *
+   *         For FINAL_-iers.txt updating, please refer to : www.iers.org/  *
+   *       - Data/Products - Standard EOP data files - Finals data IAU2000 -*
+   *         and change the FINAL_ value accordingly, say MJD shown 3 lines *
+   *         prior the last full row.                                       *
+   *                                                                        *
+   **************************************************************************
+
+  ****  We recommend that you update at least every 30 days, checking ****
+  ****      the FINAL_ dates of the respective IERS database           ****
+  =========================================================================
+  Enter the last updated dates (MJD) of the IERS databases
+  Finals data (IAU2000) and EOP14 C04 (IAU2000A) or uses
+  default dates (1 or 2)
+2
+
+  Input : Observer geodetic coordinate (degrees)
+  Longitude  +/-yyy.xxx..(negat. at WEST)
+15.065
+  Latitude  +/-yy.xxx...(max. +/- 70 deg. - posit. at NORD)
+37.0328
+  Height (in meter above sea level)
+370
+  TC  ambient temperature at the observer (deg C)
+25
+ ===========================================
+
+  Choose Time input!  'UTC' = 1  or 'TT' = 2 ( Prior the 1962.0 use 'UT1'= 1 or 'TDB' = 2 )
+1
+
+        Date and Time UTC/UT1
+    ==============================
+
+  Input : Year , Month, Day (yyyy,mm,dd)
+2021,3,1
+
+  Input : Hour, Minutes, Seconds (hh,mm,ss.xxx..)
+12,35,20
+
+    Choose mode Equinox Based (1)or CIO Based (2)
+    ==============================================
+   Input number : 1 or 2
+1
+
+ ========================================================================
+
+         THE NUMBERING CONVENTION FOR 'NTARG' IS:
+
+      1 = MERCURY         10 = MOON
+      2 = VENUS           11 = SUN
+      3 = EARTH           12 = SOLAR-SYSTEM BARYCENTER
+      4 = MARS            13 = EARTH-MOON BARYCENTER
+      5 = JUPITER         14 = Nutations (Longitude and Obliquity) (*)
+      6 = SATURN          15 = Lunar Euler angles: phi, theta, psi (**)
+      7 = URANUS          16 = Lunar angular velocity: omegax,
+      8 = NEPTUNE              omegay, omegaz  (*)
+      9 = PLUTO           17 = TT - TDB (respect geocenter) (**)
+
+      (*)  No parameter in this ephemeris database.
+      (**) Parameters calculated internally.
+
+ ========================================================================
+
+ Enter Target Body
+10
+
+ ===========================================    DATA OUTPUT   ==============================================
+
+  TODAY Y/M/D 2021/ 3/16    MJDtoday 59289    IERS FINAL_(MJD) 59625    JUNP(MJD) EOP14 C04 to IERS A 59223
+
+ Observer Geographic coordinate
+ Longitude deg  15.06500 E   Latitude deg 37.03280 N   Height  370 meter
+
+ Observer Geocentric coordinate X,Y,Z
+  X =    4922883.4810477467
+  Y =    1325070.2830650343
+  Z =    3820522.4683832699
+
+ Day of week MONDAY
+ UTC 2021/03/01  12:35:20.000000   MJD 59274.524537037039
+ UT1 2021/03/01  12:35:19.824750   MJD 59274.524535008677
+ TAI 2021/03/01  12:35:57.000000   MJD 59274.524965277778
+ TT  2021/03/01  12:36:29.184000   MJD 59274.525337777777
+ TCG 2021/03/01  12:36:30.155294   MJD 59274.525349019612
+ TDB 2021/03/01  12:36:29.185577   MJD 59274.525337796025
+ TCB 2021/03/01  12:36:50.794886   MJD 59274.525587903765
+ UT1-UTC  -0.1752500 sec.    DATABASE  IERS_A
+ ut1_int , without tidal corrections -0.17526277 sec.
+ DELTA_T  69.359250 sec.
+ LOD       0.0000   msec.  value not available
+ TT - TDB at geocenter: -.0013941386454 sec.  -.0000157319379   sec/day
+
+     Equation of time -----------    =  -12 min 15.94 sec.(Use Equinox Based)
+     Equation of equinox --------    =   -0.004006287     degs
+     Greenwich App. Sid. Time (GAST) =  348.3675449704308 degs =  23:13:28.210793 h,m,s
+     Local App. Sid. Time (LAST)     =  363.4325449704308 degs =  24:13:43.810793 h,m,s
+     Earth Rotation Angle ( ERA )    =  348.1003904232865 degs =  23:12:24.093702 h,m,s
+
+  ------------ Use IERS STANDARD EOP DATA (iau_2000 EOP 14 C04) and iau_2000 A   -------------
+         interpolate and corrected for diurnal gravitational and tidal oceanic effect.
+
+     Polar motion XP   0.053664 arcsec.
+     Polar motion YP   0.377152 arcsec.
+
+     Celestial pole offset dX    0.3541 mas
+     Celestial pole offset dY   -0.0437 mas
+
+     Nutation in longitude    -15.721404 arcsec.
+     Nutation in obliquity      2.922847 arcsec.
+
+ ===================================================================================================
+
+  Body : MOON                       JPL planetary ephemeris DE430
+  ==================================================================================================
+
+       Body's geocentric  equatorial position and velocity
+          mean equator and equinox of J2000.
+                X                   Y                     Z
+ POS     -0.0023982512637784    -0.0004741127750422     0.0000057672289348      AU
+ VEL      0.0001141347078703    -0.0005510417920464    -0.0002641807459944  AU/day
+
+  ==================================================================================================
+
+         SUN geocentric equatorial position and velocity
+              mean equator and equinox of J2000.
+                X                   Y                     Z
+ POS      0.9360993151863994    -0.2981014068677051    -0.1292264979307449      AU
+ VEL      0.0059228788754482     0.0149651396909301     0.0064870183717639  AU/day
+
+  ==================================================================================================
+
+         Barycentric equatorial position and velocity
+              mean equator and equinox of J2000.
+                X                   Y                     Z
+ POS     -0.9455438206461697     0.3027584015092809     0.1315857992885588      AU
+ VEL     -0.0058151636527610    -0.0155220715234612    -0.0067535269584263  AU/day
+
+  ==================================================================================================
+
+ Heliocentric rectangular position and velocity mean equator and equinox J2000.(╬╗,B
+                X                   Y                     Z
+ POS     -0.9384975664501778     0.3244733463656193     0.0001790126225128      AU
+ VEL     -0.0058087441675779    -0.0169212909621281    -0.0000221249923215  AU/day
+
+  --------------------------------------------------------------------------------------------------
+  Heliocentric ecliptic coordinate mean equator and equinox J2000 ( ╬╗, B, RV )
+        o , ' , ''               o , ' , ''               RV AU          Rdot (Km/s)
+       160  55  40.21674      +  0   0  37.1841      0.9930058750      -0.068034
+
+  Heliocentric ecliptic coordinate mean equator and equinox of the date ( ╬╗, B, RV )
+        o , ' , ''               o , ' , ''               RV AU          Rdot (Km/s)
+       161  13  24.60889      +  0   0  39.5730      0.9930058750      -0.068034
+  ==================================================================================================
+ Geocentric Astrometric  J2000 coordinate with relativistic corrections
+              R.A                    Dec.             Distance         Light time       deldot (Km/s)
+         h , m ,  s              o , ' , ''              Km          Earth radius
+        12  44  42.72115      +  0   8  14.6696      365699.480     1.219842 sec.      -0.009997
+  ==================================================================================================
+ Topocentric Astrometric  J2000 coordinate with relativistic corrections
+              R.A                    Dec.             Distance         Light time       deldot (Km/s)
+         h , m ,  s              o , ' , ''              Km          Earth radius
+        12  44  16.29490      -  0  27  11.6886      370766.375     1.236744 sec.       0.043958
+  ==================================================================================================
+ Geocenter mean J2000  equatorial ( GCRS ) and  ...........................ecliptic coordinate
+             R.A                     Dec.             Distance         Longit.          Latit.
+         h , m ,  s              o , ' , ''              Km             degs            degs
+        12  44  43.79626      +  0   8   6.9143      365717.852      190.227361       4.548799
+  ==================================================================================================
+ Apparent geocentric position true equinox and ecliptic of the date.(IAU 2000 EQUINOX BASED)
+             R.A                     Dec.            Distance          Distance
+         h , m ,  s              o , ' , ''              Km          Earth radius
+        12  45  47.90239      +  0   1  16.5887     365699.480         58.130826
+  ==================================================================================================
+ Apparent Topocentric position no refraction (IAU 2000 EQUINOX BASED)
+             R.A                     Dec.             Azimuth     (*)Elevation   (*)Hour Angle
+         h , m ,  s              o , ' , ''             degs            degs           degs
+        12  45  21.51454      -  0  34   9.8139     346.845237      -52.811136     172.096893
+  ==================================================================================================
+ Topocentric observed position with refraction.(IAU 2000 EQUINOX BASED)
+             R.A                     Dec.               Dist.      (*)Elevation   (*)Hour Angle
+         h , m ,  s              o , ' , ''              Km             degs            degs
+        12  45  21.51454      -  0  34   9.8139     370766.375     -52.811136        172.096907
+====================================================================================================
+
+         ILL. %       MAGN.        Angular Diameter        Phase Angle (o)     Sun's Elong.
+          93.47     -11.83           32.221 arcmin.           29.61            150.3 West
+
+                   ------------------ OTHER MOON'S  PARAMETER ------------------------
+   Moon longitude mean the date    +190d 31'  7''.3602    degs 190.518711
+   Moon apparent longitude         +190d 31'  7''.3602    degs 190.518711
+   Moon's latitude mean the date   +  4d 32' 52''.5506    degs   4.547931
+
+ -------------------------------------------------------------------------------------
+
+ Lunar Euler angles: phi, theta, psi (rad)...........  -.0648262082  0.4031564334   4341.94912276
+ Lunar librations: dphi/dt, theta/dt, dpsi/dt (rad/day) 0.0001181990  -.0001740041  0.2298499376
+
+              NEW MOON (TT) 2021/03/13   h  10:22:18.066436     Days after the new moon    17.49
+
+    FIRST QUARTER MOON (TT) 2021/03/21   h  14:39:37.532521
+
+             FULL MOON (TT) 2021/03/28   h  18:49:11.409741
+
+     LAST QUARTER MOON (TT) 2021/04/04   h  10:08:37.854913
+
+   Mean Longit. ascend. node  75.710704 degs    True Longit. ascend. node   75.629610 degs
+
+   PERIGEE 2021/03/02    h   5:20:19.632223     Distance 365427.163 Km = Parallax    1┬░  0'  0''.3125
+
+   Position angle of the Moon's bright limb  105.0014 degs
+
+   Earth's Selenographic Longitude      -1.6439 degs    Earth Selenographic Latitude       -5.9103 degs
+
+   Topocentric libration in Longitude    0.1859 degs    Topocentric Libration in Latitude   0.0691 degs
+
+   Position angle of axis               22.3889 degs
+
+   Sun's Selenographic Longitude       120.9982 degs    Sun's Selenographic Latitude       -1.5077 degs
+
+ ---------------------------------------------------------------------------------------------------
+          RISE (UT)                TRANSIT (UT)               SET (UT)
+
+       h  19:27:29.1              h   0:43:15.59            h   6:59:36.7
+
+          Azimuth                   Altitude                  Azimuth
+            92.3d                    56.0dS                    271.7d
+
+     THE  MOON    NOTES :
+
+
+
+
+
+   Physical parameter
+ -----------------------------------------------------------------------------------------------------------------
+   BODY   | Equat.  |         |  Bulk  |   Orbital   |   Synodic   |Eccentri|Ecliptic | Surface | Escape | Geom. |
+          | Radius  | Mass Kg | Density|   Period    |   Period    | city   | Inclin. | Gravity |Velocity|Albedo |
+          |  (Km)   | x10^24  | g cm^-3|   (day)     |   (day)     | (degs) | (degs)  | (m s^-2)| (Km/s) |       |
+ -----------------------------------------------------------------------------------------------------------------
+ MOON       1738.1     7.342    3.344     27.321661     29.530589    0.0549    5.145     1.62      2.38    0.136 |
+ -----------------------------------------------------------------------------------------------------------------
+
+  (*) SOFA NOTES for option (IAU 2006 CIO BASED)
+
+        The accuracy of the result is limited by the corrections for
+        refraction, which use a simple A*tan(z) + B*tan^3(z) model.
+        Providing the meteorological parameters are known accurately and
+        there are no gross local effects, the predicted observed
+        coordinates should be within 0.05 arcsec (optical) or 1 arcsec
+        (radio) for a zenith distance of less than 70 degrees, better
+        than 30 arcsec (optical or radio) at 85 degrees and better than
+        20 arcmin (optical) or 30 arcmin (radio) at the horizon.
+        Relative to the Sun and the Moon rise-setting they are taken into account
+        respectively (- 0 d. 50 ') and (-0 d .34 '; lunar semid. and parallax)
+
+        The option 'IUA 2000 Equinox based'
+        compute refraction only for body elevation
+        between -1.0 and 89.9 degrees.
+
+   (*)  The calculated value of the magnitude of Mercury and Venus is
+        not real when the phase angle of the two celestial bodies is too
+        close to the Sun to be observed photometrically, so the reported
+        value is invalid.
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+  *****************************************************************
+  want to search for a new ephemeris ?  'Y' or 'N'
+  or or choose different times ( '+' forwards or '-' for backwards
+  *****************************************************************
+
