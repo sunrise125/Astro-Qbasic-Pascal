@@ -242,7 +242,7 @@
       AE = 6378136.6                       ! Equatorial radius for Earth (meters)  
       C  = 299792458D0                     ! Speed of light  m/s 
       AU = 149597870700D0                  ! Astronomical Unit (meter)(TDB)
-      DS = 86400D0                         ! n° seconds  Day
+      DS = 86400D0                         ! nr seconds  Day
       K = 0.01720209895D0                  ! K  heliocentric gravitational costant (UA/Day)
       AUDAY = (C * DS / AU)                ! Speed of light (AU per day  "TDB")
       VC = AU / DS / C                     ! Speed of body in unit of C.
@@ -1478,10 +1478,10 @@
  WRITE (*,*)
       IF (NTARG == 10)THEN
       WRITE (*,*)"                  ------------------ OTHER MOON'S  PARAMETER ------------------------                         "
-     CALL iau_D2DTF ( "TT", 6, MJ, DJ2, IY, IM, ID, IHMSF4, J ) !Transform Julian day of date,tine New Moon
-     CALL iau_D2DTF ( "TT", 6, MJ, DJ4, IY1, IM1, ID1, IHMSF6, J ) !Transform Julian day of date,tine First Quarter Moon
-     CALL iau_D2DTF ( "TT", 6, MJ, DJ5, IY2, IM2, ID2, IHMSF7, J ) !Transform Julian day of date,tine Full Moon
-     CALL iau_D2DTF ( "TT", 6, MJ, DJ6, IY3, IM3, ID3, IHMSF8, J ) !Transform Julian day of date,tine Last Quarter Moon
+     CALL iau_D2DTF ( "TT", 2, MJ, DJ2, IY, IM, ID, IHMSF4, J ) !Transform Julian day of date,tine New Moon
+     CALL iau_D2DTF ( "TT", 2, MJ, DJ4, IY1, IM1, ID1, IHMSF6, J ) !Transform Julian day of date,tine First Quarter Moon
+     CALL iau_D2DTF ( "TT", 2, MJ, DJ5, IY2, IM2, ID2, IHMSF7, J ) !Transform Julian day of date,tine Full Moon
+     CALL iau_D2DTF ( "TT", 2, MJ, DJ6, IY3, IM3, ID3, IHMSF8, J ) !Transform Julian day of date,tine Last Quarter Moon
        CALL iau_A2AF ( 4 ,GELO ,sign , IDMSF )
       WRITE (*,301)sign,IDMSF,GELOD
        CALL iau_A2AF ( 4 ,GELOAP ,sign , IDMSF )
@@ -1674,13 +1674,13 @@
 301   FORMAT (2x," Moon longitude mean the date  ",2x,a,I3,"d",1x,I2,"'",1x,I2,"''",".",I4.4,4x,"degs",1x,f10.6 )
 311   FORMAT (2x," Moon apparent longitude       ",2x,a,I3,"d",1x,I2,"'",1x,I2,"''",".",I4.4,4x,"degs",1x,f10.6 )
 321   FORMAT (2x," Moon's latitude mean the date ",2x,a,I3,"d",1x,I2,"'",1x,I2,"''",".",I4.4,4x,"degs",1x,f10.6 )
-302   FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I6.6,5x,"Days after the new moon",4x,f5.2)
-3020  FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I6.6)
-3021  FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I6.6)
-3022  FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I6.6)
+302   FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I2.2,5x,"Days after the last new moon",4x,f5.2)
+3020  FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I2.2)
+3021  FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I2.2)
+3022  FORMAT (3X,A,I5,2("/",I2.2),3X,"h",1x,I3,2(":",I2.2),".",I2.2)
 303   FORMAT (3x,"Mean Longit. ascend. node",1x,f10.6," degs",3x," True Longit. ascend. node ",f11.6," degs")
 304   FORMAT (3x,a7,I5,2("/",I2.2),4X,"h",1x,I3,2(":",I2.2),".",I6.6,4x," Distance ",f10.3," Km = Parallax " & 
-              ,1x,I3,'°',1x,I2,"'",1x,I2,"''.",I4.4)  
+              ,1x,I3,'d',1x,I2,"'",1x,I2,"''.",I4.4)  
 305   FORMAT (3x,"Position angle of the Moon's bright limb  ",f8.4," degs")
 306   FORMAT (3x,"Earth's Selenographic Longitude     ",f8.4," degs","    Earth Selenographic Latitude       ",f7.4," degs")
 307   FORMAT (3x,"Topocentric libration in Longitude  ",f8.4," degs","    Topocentric Libration in Latitude  ",f7.4," degs")
@@ -2439,7 +2439,7 @@
       WRITE (*,*)"=====================================================================================================" 
       WRITE(*,*)
       WRITE(*,*)
-      WRITE (*,132) "       ILL. %       MAGN.        Angular Diameter        Phase Angle (°)      Sun's Elong.         "
+      WRITE (*,132) "       ILL. %       MAGN.        Angular Diameter        Phase Angle (d)      Sun's Elong.         "
       IF ( NTARG == 10 .OR. NTARG == 11 ) THEN
         WRITE ( *,1304 ) ILL,MAGN,DIAM/60D0,PANGLE,ELONG,EL
        ELSE IF( NTARG < 10 ) THEN

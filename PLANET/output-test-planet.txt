@@ -44,7 +44,7 @@ C:\Training\PLANET>2020.exe
   Height (in meter above sea level)
 370
   TC  ambient temperature at the observer (deg C)
-25
+20
  ===========================================
 
   Choose Time input!  'UTC' = 1  or 'TT' = 2 ( Prior the 1962.0 use 'UT1'= 1 or 'TDB' = 2 )
@@ -88,7 +88,7 @@ C:\Training\PLANET>2020.exe
 
  ===========================================    DATA OUTPUT   ==============================================
 
-  TODAY Y/M/D 2021/ 3/16    MJDtoday 59289    IERS FINAL_(MJD) 59625    JUNP(MJD) EOP14 C04 to IERS A 59223
+  TODAY Y/M/D 2021/ 3/17    MJDtoday 59290    IERS FINAL_(MJD) 59625    JUNP(MJD) EOP14 C04 to IERS A 59223
 
  Observer Geographic coordinate
  Longitude deg  15.06500 E   Latitude deg 37.03280 N   Height  370 meter
@@ -217,17 +217,17 @@ C:\Training\PLANET>2020.exe
  Lunar Euler angles: phi, theta, psi (rad)...........  -.0648262082  0.4031564334   4341.94912276
  Lunar librations: dphi/dt, theta/dt, dpsi/dt (rad/day) 0.0001181990  -.0001740041  0.2298499376
 
-              NEW MOON (TT) 2021/03/13   h  10:22:18.066436     Days after the new moon    17.49
+              NEW MOON (TT) 2021/03/13   h  10:22:18.07     Days after the last new moon    17.49
 
-    FIRST QUARTER MOON (TT) 2021/03/21   h  14:39:37.532521
+    FIRST QUARTER MOON (TT) 2021/03/21   h  14:41:33.22
 
-             FULL MOON (TT) 2021/03/28   h  18:49:11.409741
+             FULL MOON (TT) 2021/03/28   h  18:49:11.41
 
-     LAST QUARTER MOON (TT) 2021/04/04   h  10:08:37.854913
+     LAST QUARTER MOON (TT) 2021/04/04   h  10:03:38.52
 
    Mean Longit. ascend. node  75.710704 degs    True Longit. ascend. node   75.629610 degs
 
-   PERIGEE 2021/03/02    h   5:20:19.632223     Distance 365427.163 Km = Parallax    1┬░  0'  0''.3125
+   PERIGEE 2021/03/02    h   5:20:19.632223     Distance 365427.163 Km = Parallax    1d  0'  0''.3125
 
    Position angle of the Moon's bright limb  105.0014 degs
 

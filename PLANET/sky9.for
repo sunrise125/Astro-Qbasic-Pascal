@@ -5208,7 +5208,8 @@ c#####################################################################
 
       SUBROUTINE TIMEPHASE(K,N,JEX)
     
-
+!     This program compute the dates of the phases of the Moon, 
+!      and use the Meeus algorithms.
 
       implicit none
 
@@ -5220,16 +5221,17 @@ c#####################################################################
       double precision A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14
       double precision JE0,JE1,JEP,JEU,W,K0,JEX,JH00,JH10,JH20,JH30 
       double precision JDE0,JDE1,JDEP,JDEU,JH,JH0,JH1,JHP,JHU
+
       
 10    Tn = K / 1236.85d0                                                ! time related to the lunar phases
 !      print*," K---N ",K,N
       JDE = 2451550.09766d0 + 29.530588861d0 * K + 0.00015437d0 * 
      .     Tn**2d0 - 0.00000015d0 * Tn**3d0 + 0.00000000073d0 * Tn**4d0 ! time of mean phases of the Moon
       E0 = 1d0 - 0.002516d0 * Tn - 0.0000074d0 * Tn**2d0
-
+!      print*,"JDE-",JDE
 !------MMR = Mean Anomaly the Sun at time JDE.
       MMR = (2.5534d0+29.1053567d0*K-0.0000014d0*Tn**2d0-
-     .      0.00000011d0 * Tn**3d0) * DD2R                            ! radians
+     .      0.00000011d0 * Tn**3d0) * DD2R                            ! radians                            
 !------MLR = Mean Anomaly of the Moon.
       MLR = (201.5643d0 + 385.81693528d0 * K + 0.0107582d0 * Tn**2d0
      .  + 0.00001238d0 * Tn**3d0 - 0.000000058d0 * Tn**4d0) * DD2R    ! radians
@@ -5293,8 +5295,8 @@ c#####################################################################
       JE1= JE1 + 0.00804d0 * Sin(2D0 * FFR)
       JE1= JE1 + 0.00454d0 * E0 * Sin(MLR - MMR)
       JE1= JE1 + 0.00204d0 * Sin(2d0 * MMR) * E0**2d0
-      JE1= JE1 - 0.00180d0 * Sin(MLR - 2d0 * FFR)     ! <<<<<<<<<<<<<<<<<<<
-      JE1= JE1 - 0.00070d0 * Sin(MMR + 2d0 * FFR)
+      JE1= JE1 - 0.00180d0 * Sin(MLR - 2d0 * FFR)     
+      JE1= JE1 - 0.00070d0 * Sin(MLR + 2d0 * FFR)
       JE1= JE1 - 0.00040d0 * Sin(3d0 * MLR )
       JE1= JE1 - 0.00034d0 * E0 * Sin(2d0 * MLR - MMR)
       JE1= JE1 + 0.00032d0 * E0 * Sin(MMR + 2d0 * FFR)
@@ -5311,16 +5313,16 @@ c#####################################################################
       JE1= JE1 + 0.00002d0 * Sin(2D0 * MLR - 2d0 * FFR)
       JE1= JE1 + 0.00002d0 * Sin(MLR - MMR + 2d0 * FFR)
       JE1= JE1 - 0.00002d0 * Sin(3d0 * MLR + MMR)
-!      print*,"JE!",JE1
+
 !------- Correction for First and Last Quarters
 
       W = 0.00306 - 0.00038*E0*cos(MMR) + 0.00026*cos(MLR) 
      .   -0.00002*cos(MLR-MMR) + 0.00002*cos(MLR+MMR)
      .   + 0.00002*cos(2d0*FFR)
-!      print*,"W ",W  
-      JE1 = JE1 + W    ! +W for First Quarter
+  
+!      JE1 = JE1 + W    ! +W for First Quarter
 
-      JEU = JE1 - W    ! -W for Last Quarter
+!      JEU = JE1 - W    ! -W for Last Quarter
 
 !  'Subroutine per il calcolo della Luna Piena
       JEP= -0.40614d0 * Sin(MLR)
@@ -5364,34 +5366,16 @@ c#####################################################################
       JH= JH + 0.000037d0 * A12
       JH= JH + 0.000035d0 * A13
       JH= JH + 0.000023d0 * A14
-!      print*,"IH ",JH
-      IF (N == 0) THEN
-        JH00 = JH 
-        JDE0 = JDE       
-      ELSE IF (N == 1) THEN
-        JH10 = JH
-        JDE1 = JDE 
-      ELSE IF (N == 2) THEN
-        JH20 = JH
-        JDEP = JDE 
-      ELSE IF (N == 3) THEN 
-        JH30 = JH
-        JDEU = JDE  
-      END IF     
-!       print*,"JDE0 + JE0 + JH00",JDE0,JE0,JH00
-      JH0 = JDE0 + JE0 + JH00                       !Add a JDE the corrections, for julian day of New Moon
-      JH1 = JDE1 + JE1 + JH10                       !Add a JDE the corrections, for julian day of First Quarter
-      JHP = JDEP + JEP + JH20                       !Add a JDE the corrections, for julian day of Full Moon  
-      JHU = JDEU + JEU + JH30                       !Add a JDE the corrections, for julian day of Last Quarter
+
 
       IF (N == 0) THEN
-        JEX = JH0        
+        JEX = JDE + JE0 + JH      !!Add a JDE the corrections, for julian day of New Moon        
       ELSE IF (N == 1) THEN
-        JEX = JH1
+        JEX = JDE + JE1 + W + JH  ! Add a JDE the corrections, for julian day of First Quarter
       ELSE IF (N == 2) THEN
-        JEX = JHP
+        JEX = JDE + JEP + JH      ! Add a JDE the corrections, for julian day of Full Moon 
       ELSE IF (N == 3) THEN 
-        JEX = JHU 
+        JEX = JDE + JE1 - W + JH  ! Add a JDE the corrections, for julian day of Last Quarter
       END IF     
 
       END
